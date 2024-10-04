@@ -107,14 +107,14 @@ export function Navbar({ brandName, routes, action }) {
 }
 
 Navbar.defaultProps = {
-  brandName: "Material Tailwind React",
+  brandName: "Suriname Offline Education Web",
   action: (
     <a
       href="#"
       target="_blank"
     >
       <Button variant="gradient" size="sm" fullWidth>
-        free download
+        Update Online
       </Button>
     </a>
   ),
