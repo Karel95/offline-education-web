@@ -71,7 +71,7 @@ export function Navbar({ brandName, routes, action }) {
         </Link>
         <div className="hidden lg:block">{navList}</div>
         <div className="hidden gap-2 lg:flex">
-          <SubjectsFlyout />
+          <SubjectsFlyout maxHeight={'400px'}/>
           {React.cloneElement(action, {
             className: "hidden lg:inline-block",
           })}
@@ -95,7 +95,7 @@ export function Navbar({ brandName, routes, action }) {
         open={openNav}
       >
         <div className="container mx-auto">
-          <SubjectsFlyout />
+          <SubjectsFlyout maxHeight={'200px'}/>
           {navList}
           {React.cloneElement(action, {
             className: "w-full block",

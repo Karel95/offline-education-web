@@ -1,7 +1,7 @@
 import { Button } from '@material-tailwind/react';
 import React, { useState } from 'react';
 
-const SubjectsFlyout = () => {
+const SubjectsFlyout = ({ maxHeight }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleFlyout = () => {
@@ -39,7 +39,7 @@ const SubjectsFlyout = () => {
       {isOpen && (
         <div className="absolute left-1/2 z-10 mt-5 flex w-screen max-w-max -translate-x-1/2 px-4">
           <div className="w-screen max-w-md flex-auto overflow-hidden rounded-3xl bg-white text-sm leading-6 shadow-lg ring-1 ring-gray-900/5">
-            <div className="p-4" style={{ maxHeight: '200px', overflowY: 'auto' }}>
+            <div className="p-4" style={{ maxHeight, overflowY: 'auto' }}>
               {/* Contenido desplazable */}
               <div className="group relative flex gap-x-6 rounded-lg p-4 hover:bg-gray-50">
                 <div className="mt-1 flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
@@ -70,10 +70,14 @@ const SubjectsFlyout = () => {
                     <span className="absolute inset-0"></span>
                   </a>
                   <p className="mt-1 text-gray-600">
-                    Reading, Writing, Speaking and Listening, Vocabulary Development
+                    Reading, 
+                    Writing, 
+                    Speaking and Listening, 
+                    Vocabulary Development
                   </p>
                 </div>
               </div>
+              {/*  */}
               <div className="group relative flex gap-x-6 rounded-lg p-4 hover:bg-gray-50">
                 <div className="mt-1 flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
                   <svg
@@ -99,11 +103,305 @@ const SubjectsFlyout = () => {
                 </div>
                 <div>
                   <a href="#" className="font-semibold text-gray-900">
-                    English Language Arts (ELA)
+                    Mathematics
                     <span className="absolute inset-0"></span>
                   </a>
                   <p className="mt-1 text-gray-600">
-                    Reading, Writing, Speaking and Listening, Vocabulary Development
+                    Basic Arithmetic (Addition, Subtraction, Multiplication, Division), 
+                    Geometry, 
+                    Measurement, 
+                    Data and Probability                  
+                  </p>
+                </div>
+              </div>
+              {/*  */}
+              <div className="group relative flex gap-x-6 rounded-lg p-4 hover:bg-gray-50">
+                <div className="mt-1 flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
+                  <svg
+                    className="h-6 w-6 text-gray-600 group-hover:text-indigo-600"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth="1.5"
+                    stroke="currentColor"
+                    aria-hidden="true"
+                    data-slot="icon"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M10.5 6a7.5 7.5 0 1 0 7.5 7.5h-7.5V6Z"
+                    />
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M13.5 10.5H21A7.5 7.5 0 0 0 13.5 3v7.5Z"
+                    />
+                  </svg>
+                </div>
+                <div>
+                  <a href="#" className="font-semibold text-gray-900">
+                  Science
+                    <span className="absolute inset-0"></span>
+                  </a>
+                  <p className="mt-1 text-gray-600">
+                    Life Science (Plants, Animals, Ecosystems),
+                    Physical Science (Matter, Energy, Forces),
+                    Earth Science (Weather, Earth Materials),
+                    Environmental Science 
+                  </p>
+                </div>
+              </div>
+              {/*  */}
+              <div className="group relative flex gap-x-6 rounded-lg p-4 hover:bg-gray-50">
+                <div className="mt-1 flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
+                  <svg
+                    className="h-6 w-6 text-gray-600 group-hover:text-indigo-600"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth="1.5"
+                    stroke="currentColor"
+                    aria-hidden="true"
+                    data-slot="icon"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M10.5 6a7.5 7.5 0 1 0 7.5 7.5h-7.5V6Z"
+                    />
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M13.5 10.5H21A7.5 7.5 0 0 0 13.5 3v7.5Z"
+                    />
+                  </svg>
+                </div>
+                <div>
+                  <a href="#" className="font-semibold text-gray-900">
+                  Social Studies
+                    <span className="absolute inset-0"></span>
+                  </a>
+                  <p className="mt-1 text-gray-600">
+                    History (Local, National, World History),
+                    Geography,
+                    Civics (Government, Citizenship),
+                    Economics
+                  </p>
+                </div>
+              </div>
+              {/*  */}
+              <div className="group relative flex gap-x-6 rounded-lg p-4 hover:bg-gray-50">
+                <div className="mt-1 flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
+                  <svg
+                    className="h-6 w-6 text-gray-600 group-hover:text-indigo-600"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth="1.5"
+                    stroke="currentColor"
+                    aria-hidden="true"
+                    data-slot="icon"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M10.5 6a7.5 7.5 0 1 0 7.5 7.5h-7.5V6Z"
+                    />
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M13.5 10.5H21A7.5 7.5 0 0 0 13.5 3v7.5Z"
+                    />
+                  </svg>
+                </div>
+                <div>
+                  <a href="#" className="font-semibold text-gray-900">
+                  Art
+                    <span className="absolute inset-0"></span>
+                  </a>
+                  <p className="mt-1 text-gray-600">
+                    Visual Arts (Drawing, Painting, Sculpture),
+                    Art History,
+                    Introduction to Different Art Techniques
+                  </p>
+                </div>
+              </div>
+              {/*  */}
+              <div className="group relative flex gap-x-6 rounded-lg p-4 hover:bg-gray-50">
+                <div className="mt-1 flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
+                  <svg
+                    className="h-6 w-6 text-gray-600 group-hover:text-indigo-600"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth="1.5"
+                    stroke="currentColor"
+                    aria-hidden="true"
+                    data-slot="icon"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M10.5 6a7.5 7.5 0 1 0 7.5 7.5h-7.5V6Z"
+                    />
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M13.5 10.5H21A7.5 7.5 0 0 0 13.5 3v7.5Z"
+                    />
+                  </svg>
+                </div>
+                <div>
+                  <a href="#" className="font-semibold text-gray-900">
+                  Music
+                    <span className="absolute inset-0"></span>
+                  </a>
+                  <p className="mt-1 text-gray-600">
+                    Music Theory,
+                    Singing,
+                    Instrumental Music,
+                    Music History
+                  </p>
+                </div>
+              </div>
+              {/*  */}
+              <div className="group relative flex gap-x-6 rounded-lg p-4 hover:bg-gray-50">
+                <div className="mt-1 flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
+                  <svg
+                    className="h-6 w-6 text-gray-600 group-hover:text-indigo-600"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth="1.5"
+                    stroke="currentColor"
+                    aria-hidden="true"
+                    data-slot="icon"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M10.5 6a7.5 7.5 0 1 0 7.5 7.5h-7.5V6Z"
+                    />
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M13.5 10.5H21A7.5 7.5 0 0 0 13.5 3v7.5Z"
+                    />
+                  </svg>
+                </div>
+                <div>
+                  <a href="#" className="font-semibold text-gray-900">
+                  Physical Education (PE)
+                    <span className="absolute inset-0"></span>
+                  </a>
+                  <p className="mt-1 text-gray-600">
+                    Team Sports,
+                    Individual Sports,
+                    Health and Fitness,
+                    Motor Skills Development
+                  </p>
+                </div>
+              </div>
+              {/*  */}
+              <div className="group relative flex gap-x-6 rounded-lg p-4 hover:bg-gray-50">
+                <div className="mt-1 flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
+                  <svg
+                    className="h-6 w-6 text-gray-600 group-hover:text-indigo-600"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth="1.5"
+                    stroke="currentColor"
+                    aria-hidden="true"
+                    data-slot="icon"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M10.5 6a7.5 7.5 0 1 0 7.5 7.5h-7.5V6Z"
+                    />
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M13.5 10.5H21A7.5 7.5 0 0 0 13.5 3v7.5Z"
+                    />
+                  </svg>
+                </div>
+                <div>
+                  <a href="#" className="font-semibold text-gray-900">
+                  Technology
+                    <span className="absolute inset-0"></span>
+                  </a>
+                  <p className="mt-1 text-gray-600">
+                    Basic Computer Skills,
+                    Digital Literacy,
+                    Introduction to Coding and Programming
+                  </p>
+                </div>
+              </div>
+              {/*  */}
+              <div className="group relative flex gap-x-6 rounded-lg p-4 hover:bg-gray-50">
+                <div className="mt-1 flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
+                  <svg
+                    className="h-6 w-6 text-gray-600 group-hover:text-indigo-600"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth="1.5"
+                    stroke="currentColor"
+                    aria-hidden="true"
+                    data-slot="icon"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M10.5 6a7.5 7.5 0 1 0 7.5 7.5h-7.5V6Z"
+                    />
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M13.5 10.5H21A7.5 7.5 0 0 0 13.5 3v7.5Z"
+                    />
+                  </svg>
+                </div>
+                <div>
+                  <a href="#" className="font-semibold text-gray-900">
+                  Health Education
+                    <span className="absolute inset-0"></span>
+                  </a>
+                  <p className="mt-1 text-gray-600">
+                  Personal Health,
+                  Nutrition,
+                  Safety and First Aid,
+                  Social-Emotional Learning
+                  </p>
+                </div>
+              </div>
+              {/*  */}
+              <div className="group relative flex gap-x-6 rounded-lg p-4 hover:bg-gray-50">
+                <div className="mt-1 flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
+                  <svg
+                    className="h-6 w-6 text-gray-600 group-hover:text-indigo-600"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth="1.5"
+                    stroke="currentColor"
+                    aria-hidden="true"
+                    data-slot="icon"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M10.5 6a7.5 7.5 0 1 0 7.5 7.5h-7.5V6Z"
+                    />
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M13.5 10.5H21A7.5 7.5 0 0 0 13.5 3v7.5Z"
+                    />
+                  </svg>
+                </div>
+                <div>
+                  <a href="#" className="font-semibold text-gray-900">
+                  Foreign Language (optional)
+                    <span className="absolute inset-0"></span>
+                  </a>
+                  <p className="mt-1 text-gray-600">
+                    Introduction to another language (e.g., Spanish, French)
                   </p>
                 </div>
               </div>
@@ -124,7 +422,7 @@ const SubjectsFlyout = () => {
                       clipRule="evenodd"
                     />
                   </svg>
-                  Watch demo
+                  Update Online
                 </a>
                 <a href="#" className="flex items-center justify-center gap-x-2.5 p-3 font-semibold text-gray-900 hover:bg-gray-100">
                   <svg
@@ -140,7 +438,7 @@ const SubjectsFlyout = () => {
                       clipRule="evenodd"
                     />
                   </svg>
-                  Contact sales
+                  Help
                 </a>
               </div>
             </div>
