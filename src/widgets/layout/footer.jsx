@@ -5,9 +5,9 @@ const year = new Date().getFullYear();
 
 export function Footer({ title, description, socials, menus, copyright }) {
   return (
-    <footer className="relative px-4 pt-8 pb-6">
+    <footer className="relative  px-4 pt-8 pb-6">
       <div className="container mx-auto">
-        <div className="flex flex-wrap pt-6 text-center lg:text-left">
+        <div className="flex flex-wrap pt-6 text-center lg:text-left shadow-lg border shadow-gray-500/50 rounded-lg">
           <div className="w-full px-4 lg:w-6/12">
             <Typography variant="h4" className="mb-4" color="blue-gray">
               {title}
@@ -144,9 +144,9 @@ Footer.defaultProps = {
   ],
   copyright: (
     <>
-      Copyright © {year} Suriname Offline Education App by{" "}
+      Copyright © {year} Suriname Offline Education Web by{" "}
       <a
-        href="#"
+        href="https://karldev95.netlify.app/"
         target="_blank"
         className="text-blue-gray-500 transition-colors hover:text-blue-500"
       >
