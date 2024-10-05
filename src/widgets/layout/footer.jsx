@@ -1,5 +1,5 @@
-import PropTypes from "prop-types";
-import { Typography, IconButton } from "@material-tailwind/react";
+import PropTypes from 'prop-types';
+import { Typography, IconButton } from '@material-tailwind/react';
 
 const year = new Date().getFullYear();
 
@@ -23,7 +23,10 @@ export function Footer({ title, description, socials, menus, copyright }) {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <IconButton color="white" className="rounded-full shadow-none bg-transparent">
+                  <IconButton
+                    color="white"
+                    className="rounded-full shadow-none bg-transparent"
+                  >
                     <Typography color={color}>
                       <i className={`fa-brands fa-${name}`} />
                     </Typography>
@@ -79,75 +82,76 @@ export function Footer({ title, description, socials, menus, copyright }) {
 }
 
 Footer.defaultProps = {
-  title: "Material Tailwind",
+  title: 'Suriname Offline Education Web',
   description:
-    "Easy to use React components for Tailwind CSS and Material Design.",
+    'Providing accessible educational content to schools in Suriname, even with limited internet access. Built as a PWA for offline functionality.',
   socials: [
     {
-      color: "gray",
-      name: "twitter",
-      path: "/",
+      color: 'gray',
+      name: 'twitter',
+      path: '/',
     },
     {
-      color: "gray",
-      name: "youtube",
-      path: "https://www.youtube.com",
+      color: 'gray',
+      name: 'youtube',
+      path: 'https://www.youtube.com',
     },
     {
-      color: "gray",
-      name: "instagram",
-      path: "/",
+      color: 'gray',
+      name: 'instagram',
+      path: '/',
     },
     {
-      color: "black",
-      name: "github",
-      path: "/",
+      color: 'black',
+      name: 'github',
+      path: 'https://github.com/Karel95', // Update with actual GitHub link if applicable
     },
   ],
   menus: [
     {
-      name: "useful links",
+      name: 'useful links',
       items: [
-        { name: "About Us", path: "/" },
-        { name: "Blog", path: "/" },
+        { name: 'About Us', path: '/' },
+        { name: 'Blog', path: '/' },
         {
-          name: "Github",
-          path: "/",
+          name: 'Github',
+          path: 'https://github.com/Karel95/offline-education-web', // Update with actual GitHub link if applicable
         },
         {
-          name: "Free Products",
-          path: "/",
+          name: 'Offline Features',
+          path: '/',
         },
       ],
     },
     {
-      name: "other resources",
+      name: 'other resources',
       items: [
         {
-          name: "MIT License",
-          path: "/",
+          name: 'MIT License',
+          path: '/',
         },
         {
-          name: "Contribute",
-          path: "/",
+          name: 'Contribute',
+          path: '/',
         },
         {
-          name: "Change Log",
-          path: "/",
+          name: 'Change Log',
+          path: '/',
         },
         {
-          name: "Contact Us",
-          path: "/",
+          name: 'Contact Us',
+          path: '/',
         },
       ],
     },
   ],
   copyright: (
     <>
-      Copyright © {year} Suriname Offline Education Web by{" "}
+      Copyright © {new Date().getFullYear()} Suriname Offline Education Web by{' '}
       <a
         href="https://karldev95.netlify.app/"
         target="_blank"
+        rel="noopener noreferrer"
         className="text-blue-gray-500 transition-colors hover:text-blue-500"
       >
         KarlDev
@@ -165,6 +169,6 @@ Footer.propTypes = {
   copyright: PropTypes.node,
 };
 
-Footer.displayName = "/src/widgets/layout/footer.jsx";
+Footer.displayName = '/src/widgets/layout/footer.jsx';
 
 export default Footer;
