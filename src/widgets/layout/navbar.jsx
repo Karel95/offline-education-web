@@ -110,7 +110,7 @@ Navbar.defaultProps = {
   brandName: "Suriname Offline Education Web",
   action: (
     <a
-      href="#"
+      href="/"
       target="_blank"
     >
       <Button variant="gradient" size="sm" fullWidth>
