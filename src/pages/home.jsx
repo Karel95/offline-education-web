@@ -41,6 +41,7 @@ export function Home() {
           </div>
         </div>
       </div>
+
       <section className="-mt-32 bg-white px-4 pb-20 pt-4">
         <div className="container mx-auto">
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -82,11 +83,11 @@ export function Home() {
               <Button variant="filled">Learn More</Button>
             </div>
             <div className="mx-auto mt-24 flex w-full justify-center px-4 md:w-4/12 lg:mt-0">
-              <Card className="shadow-lg border shadow-gray-500/10 rounded-lg">
+              <Card className="shadow-lg border shadow-gray-500/50 rounded-lg">
                 <CardHeader floated={false} className="relative h-56">
                   <img
                     alt="PWA for Education"
-                    src="/img/education.png" // Replace with a relevant image for your PWA
+                    src="/img/background-2.jpg" // Replace with a relevant image for your PWA
                     className="h-full w-full"
                   />
                 </CardHeader>
@@ -118,12 +119,19 @@ export function Home() {
           </div>
         </div>
       </section>
+
       <section className="px-4 pt-20 pb-48">
         <div className="container mx-auto">
-          <PageTitle section="Our Team" heading="Here are our heroes">
-            According to the National Oceanic and Atmospheric Administration,
-            Ted, Scambos, NSIDClead scentist, puts the potentially record
-            maximum.
+          <PageTitle
+            section="Our Project"
+            heading="Empowering Education with Offline Access"
+          >
+            Our Progressive Web App (PWA) enables schools in areas with limited
+            internet connectivity to access educational resources offline. By
+            using advanced technologies like service workers and IndexedDB, our
+            platform ensures that students can learn without interruption. With
+            offline functionality and data synchronization when internet is
+            available, we aim to bridge the digital divide in education.
           </PageTitle>
           <div className="mt-24 grid grid-cols-1 gap-12 gap-x-24 md:grid-cols-2 xl:grid-cols-4">
             {teamData.map(({ img, name, position, socials }) => (
@@ -146,6 +154,7 @@ export function Home() {
           </div>
         </div>
       </section>
+
       <section className="relative bg-white py-24 px-4">
         <div className="container mx-auto">
           <PageTitle section="Co-Working" heading="Build something">
@@ -175,6 +184,7 @@ export function Home() {
               </Card>
             ))}
           </div>
+
           <PageTitle section="Contact Us" heading="Want to work with us?">
             Complete this form and we will get back to you in 24 hours.
           </PageTitle>
@@ -206,8 +216,10 @@ export function Home() {
               Send Message
             </Button>
           </form>
+          
         </div>
       </section>
+
       <div className="bg-white">
         <Footer />
       </div>
