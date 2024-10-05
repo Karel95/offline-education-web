@@ -1,12 +1,9 @@
-import React from 'react'
+// src/pages/subjects/mathematics.jsx
 
-const Mathematics = () => {
-  return (
-    <div>
-      <h1>Mathematics</h1>
-      <p>Basic Arithmetic (Addition, Subtraction, Multiplication, Division), Geometry, Measurement, Data and Probability</p>
-    </div>
-  )
-}
+import React from 'react';
 
-export default Mathematics
+const MathematicsPage = () => {
+  return <div>This is the Mathematics Page</div>;
+};
+
+export default MathematicsPage;

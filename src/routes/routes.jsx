@@ -1,3 +1,4 @@
+//src/routes/routes.jsx
 import { Home, Profile, SignIn, SignUp } from "@/pages";
 
 export const routes = [
