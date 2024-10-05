@@ -1,10 +1,11 @@
 import { Button } from '@material-tailwind/react';
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom'; // Importa Link
 
 const SubjectsFlyout = ({ maxHeight }) => {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
+  const flyoutRef = useRef(null); // Create a ref for the flyout
 
   const toggleFlyout = () => {
     setIsOpen((prev) => !prev);
@@ -14,8 +15,25 @@ const SubjectsFlyout = ({ maxHeight }) => {
     navigate(path);
   };
 
+  const handleClickOutside = (event) => {
+    // Check if the click is outside the flyout
+    if (flyoutRef.current && !flyoutRef.current.contains(event.target)) {
+      setIsOpen(false); // Close the flyout
+    }
+  };
+
+  useEffect(() => {
+    // Add event listener for clicks
+    document.addEventListener('mousedown', handleClickOutside);
+    
+    // Cleanup the event listener on component unmount
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
   return (
-    <div className="relative">
+    <div className="relative" ref={flyoutRef}>
       <Button
         variant="text"
         size="sm"
@@ -71,7 +89,10 @@ const SubjectsFlyout = ({ maxHeight }) => {
                 <div>
                   <button
                     className="font-semibold text-gray-900"
-                    onClick={() => handleNavigation('/subjects/ela')}
+                    onClick={() => {
+                      handleNavigation('/subjects/mathematics'); // Navigate to the route
+                      setIsOpen(false); // Close the flyout
+                    }}
                   >
                     English Language Arts (ELA)
                     <span className="absolute inset-0"></span>
@@ -107,7 +128,10 @@ const SubjectsFlyout = ({ maxHeight }) => {
                 <div>
                   <button
                     className="font-semibold text-gray-900"
-                    onClick={() => handleNavigation('/subjects/mathematics')}
+                    onClick={() => {
+                      handleNavigation('/subjects/mathematics'); // Navigate to the route
+                      setIsOpen(false); // Close the flyout
+                    }}
                   >
                     Mathematics
                     <span className="absolute inset-0"></span>

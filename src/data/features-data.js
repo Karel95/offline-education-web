@@ -4,26 +4,27 @@ import {
 
 export const featuresData = [
   {
-    color: "gray",
-    title: "Awarded Agency",
+    color: "blue",
+    title: "Offline Accessibility",
     icon: ChatBubbleBottomCenterTextIcon,
     description:
-      "Divide details about your product or agency work into parts. A paragraph describing a feature will be enough.",
+      "Our PWA ensures that users can access educational content without an internet connection, providing uninterrupted learning experiences.",
   },
   {
-    color: "gray",
-    title: "Free Revisions",
+    color: "blue",
+    title: "Personalized Learning Paths",
     icon: ChatBubbleBottomCenterTextIcon,
     description:
-      "Keep you user engaged by providing meaningful information. Remember that by this time, the user is curious.",
+      "Leveraging AI, our platform customizes learning journeys based on user preferences and progress, making education more engaging.",
   },
   {
-    color: "gray",
-    title: "Verified Company",
+    color: "blue",
+    title: "Sync Data Seamlessly",
     icon: ChatBubbleBottomCenterTextIcon,
     description:
-      "Write a few lines about each one. A paragraph describing a feature will be enough. Keep you user engaged!",
+      "Data synchronization occurs automatically when a connection is available, ensuring users have the latest information at their fingertips.",
   },
+
 ];
 
 export default featuresData;

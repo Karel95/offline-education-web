@@ -86,37 +86,37 @@ Footer.defaultProps = {
     {
       color: "gray",
       name: "twitter",
-      path: "#",
+      path: "/",
     },
     {
       color: "gray",
       name: "youtube",
-      path: "https://www.youtube.com/channel/UCVyTG4sCw-rOvB9oHkzZD1w",
+      path: "https://www.youtube.com",
     },
     {
       color: "gray",
       name: "instagram",
-      path: "#",
+      path: "/",
     },
     {
       color: "black",
       name: "github",
-      path: "#",
+      path: "/",
     },
   ],
   menus: [
     {
       name: "useful links",
       items: [
-        { name: "About Us", path: "#" },
-        { name: "Blog", path: "#" },
+        { name: "About Us", path: "/" },
+        { name: "Blog", path: "/" },
         {
           name: "Github",
-          path: "#",
+          path: "/",
         },
         {
           name: "Free Products",
-          path: "#",
+          path: "/",
         },
       ],
     },
@@ -125,19 +125,19 @@ Footer.defaultProps = {
       items: [
         {
           name: "MIT License",
-          path: "#",
+          path: "/",
         },
         {
           name: "Contribute",
-          path: "#",
+          path: "/",
         },
         {
           name: "Change Log",
-          path: "#",
+          path: "/",
         },
         {
           name: "Contact Us",
-          path: "#",
+          path: "/",
         },
       ],
     },
