@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [
     react(),
     VitePWA({
-      includeAssets: ['suriname-logo.png'],
+      includeAssets: ['img/**/*'],
       manifest: {
         display: 'standalone',
         display_override: ['window-controls-overlay'],
