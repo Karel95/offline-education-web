@@ -6,6 +6,9 @@ export default defineConfig({
   plugins: [
     react(),
     VitePWA({
+      workbox: {
+        maximumFileSizeToCacheInBytes: 4000000, // 4 MB (increase this as needed)
+      },
       includeAssets: ['img/**/*'],
       manifest: {
         display: 'standalone',
@@ -22,21 +25,21 @@ export default defineConfig({
             src: '/img/screenshots/desktop-1366x769.png',
             sizes: '1366x769',
             type: 'image/png',
-            form_factor: 'wide'
+            form_factor: 'wide',
           },
           {
             src: '/img/screenshots/mobile-247x549.png',
             sizes: '247x549',
             type: 'image/png',
-            form_factor: 'narrow'
-          }
+            form_factor: 'narrow',
+          },
         ],
         icons: [
           {
             src: '/img/suriname-logo.png',
             sizes: 'any',
             type: 'image/png',
-            purpose: 'any maskable'
+            purpose: 'any maskable',
           },
         ],
       },
