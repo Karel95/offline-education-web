@@ -9,13 +9,10 @@
     "preview": "vite preview"
   },
   "peerDependencies": {
-    "@tensorflow/tfjs-core": "^4.21.0",
-    "@tensorflow/tfjs-converter": "^4.21.0",
-    "@tensorflow/tfjs-layers": "^4.21.0",
-    "@tensorflow/tfjs-data": "^4.21.0",
     "@tensorflow-models/qna": "^1.0.2",
-    "@tensorflow-models/toxicity": "^1.2.2",
-    "@tensorflow/tfjs-backend-cpu": "^4.21.0"
+    "@tensorflow/tfjs-converter": "^4.21.0",
+    "@tensorflow/tfjs-core": "^4.21.0",
+    "@tensorflow/tfjs-node": "^4.21.0"
   },
   "dependencies": {
     "@heroicons/react": "2.0.18",
