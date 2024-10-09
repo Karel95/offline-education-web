@@ -7,7 +7,7 @@ export default defineConfig({
     react(),
     VitePWA({
       workbox: {
-        maximumFileSizeToCacheInBytes: 4000000, // 4 MB (increase this as needed)
+        maximumFileSizeToCacheInBytes: 5000000, // 4 MB (increase this as needed)
       },
       includeAssets: ['img/**/*'],
       manifest: {
