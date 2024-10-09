@@ -105,7 +105,7 @@ export function ChatAI() {
       >
         <div className="mt-10 w-[90%] md:w-[60%] bg-white bg-opacity-20 backdrop-blur-xs border border-gray-300 rounded-lg shadow-md">
           <div className="bg-gray-800 text-white p-3 text-lg rounded-t-lg flex justify-between items-center">
-            <span>Chat IA</span>
+            <span>Chat AI</span>
             <button
               onClick={toggleSidebar}
               className="ml-2 text-sm bg-blue-500 text-white rounded px-2 hover:bg-blue-600 transition"
@@ -128,7 +128,7 @@ export function ChatAI() {
             ))}
             {loading && (
               <div className="p-3 rounded-lg bg-gray-300 text-black self-start">
-                Cargando respuesta...
+                Loading...
               </div>
             )}
           </div>
@@ -145,7 +145,7 @@ export function ChatAI() {
               onClick={handleSendMessage}
               className="ml-2 bg-gray-800 text-white text-sm px-4 py-2 rounded-lg hover:bg-white hover:text-black hover:shadow-md transition"
             >
-              Enviar
+              Send
             </button>
           </div>
         </div>
