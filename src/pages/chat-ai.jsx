@@ -21,10 +21,17 @@ export function ChatAI() {
     }
   };
 
+  // Aquí se define la función handleKeyDown
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();  // Previene el comportamiento predeterminado de 'Enter'
+      handleSendMessage();  // Llama a la función de enviar mensaje
+    }
+  };
+
   return (
-    
     <div className="flex justify-center items-center h-screen absolute top-0 w-full bg-[url('/img/suriname-bg.png')] bg-cover bg-center">
-      <div className="w-96 bg-white bg-opacity-20 backdrop-blur-xs border border-gray-300 rounded-lg shadow-md">
+      <div className="mt-10 w-[90%] md:w-[60%] bg-white bg-opacity-20 backdrop-blur-xs border border-gray-300 rounded-lg shadow-md">
         <div className="bg-gray-800 text-white p-3 text-lg rounded-t-lg text-center">
           Chat IA
         </div>
@@ -49,6 +56,7 @@ export function ChatAI() {
             placeholder="Escribe tu mensaje aquí..."
             value={input}
             onChange={(e) => setInput(e.target.value)}
+            onKeyDown={handleKeyDown}
           />
           <button
             onClick={handleSendMessage}
