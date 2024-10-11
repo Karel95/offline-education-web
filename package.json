@@ -8,23 +8,21 @@
     "build": "vite build",
     "preview": "vite preview"
   },
-  "peerDependencies": {
-    "@tensorflow-models/qna": "^1.0.2",
-    "@tensorflow/tfjs-converter": "^4.21.0",
-    "@tensorflow/tfjs-core": "^4.21.0",
-    "@tensorflow/tfjs-node": "^4.21.0",
-    "@tensorflow/tfjs-backend-cpu": "^4.21.0"
-  },
   "dependencies": {
     "@heroicons/react": "2.0.18",
     "@material-tailwind/react": "^2.1.10",
+    "@tensorflow-models/qna": "^1.0.2",
+    "@tensorflow/tfjs": "^4.21.0",
     "prop-types": "15.8.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-router-dom": "6.17.0"
   },
   "devDependencies": {
+    "@rollup/plugin-node-resolve": "^11.1.0",
+    "@rollup/plugin-typescript": "3.1.1",
     "@tailwindcss/forms": "^0.5.9",
+    "@tensorflow/tfjs-backend-cpu": "^4.21.0",
     "@types/react": "18.2.31",
     "@types/react-dom": "18.2.14",
     "@vitejs/plugin-react": "4.1.0",
@@ -34,5 +32,9 @@
     "tailwindcss": "^3.4.13",
     "vite": "^4.5.5",
     "vite-plugin-pwa": "^0.20.5"
+  },
+  "peerDependencies": {
+    "@tensorflow/tfjs-converter": "^4.21.0",
+    "@tensorflow/tfjs-core": "^4.21.0"
   }
 }

@@ -8,20 +8,25 @@ export function ChatAI() {
   const [input, setInput] = useState(''); // Almacena el valor del input
   const [loading, setLoading] = useState(false); // Indicador de carga mientras busca respuestas
   const [model, setModel] = useState(null); // Almacena el modelo de QnA
+  const [error, setError] = useState(null); // Almacena cualquier error durante la carga
   const [sidebarVisible, setSidebarVisible] = useState(false); // Para mostrar/ocultar el sidebar con el 'passage'
 
   // El 'passage' es el contexto del cual el modelo extraerá respuestas
   const passage =
-    "Google LLC is an American multinational technology company that specializes in Internet-related services and products, which include online advertising technologies, search engine, cloud computing, software, and hardware. It is considered one of the Big Four technology companies, alongside Amazon, Apple, and Facebook. Google was founded in September 1998 by Larry Page and Sergey Brin while they were Ph.D. students at Stanford University in California. Together they own about 14 percent of its shares and control 56 percent of the stockholder voting power through supervoting stock...";
+    "Google LLC is an American multinational technology company that specializes in Internet-related services and products, which include online advertising technologies, search engine, cloud computing, software, and hardware. It is considered one of the Big Four technology companies, alongside Amazon, Apple, and Facebook. Google was founded in September 1998 by Larry Page and Sergey Brin while they were Ph.D. students at Stanford University in California. Together they own about 14 percent of its shares and control 56 percent of the stockholder voting power through supervoting stock. They incorporated Google as a California privately held company on September 4, 1998, in California. Google was then reincorporated in Delaware on October 22, 2002. An initial public offering (IPO) took place on August 19, 2004, and Google moved to its headquarters in Mountain View, California, nicknamed the Googleplex. In August 2015, Google announced plans to reorganize its various interests as a conglomerate called Alphabet Inc. Google is Alphabet's leading subsidiary and will continue to be the umbrella company for Alphabet's Internet interests. Sundar Pichai was appointed CEO of Google, replacing Larry Page who became the CEO of Alphabet.";
 
   // Cargar el modelo de QnA cuando el componente se monte
   useEffect(() => {
     const loadModel = async () => {
       try {
-        const loadedModel = await qna.load(); // Cargar el modelo
+        setLoading(true); // Iniciar la carga
+        const loadedModel = await qna.load(); // Intentar cargar el modelo
         setModel(loadedModel); // Guardar el modelo en el estado
       } catch (error) {
         console.error('Error al cargar el modelo QnA:', error);
+        setError('No se pudo cargar el modelo QnA desde internet.'); // Guardar el error
+      } finally {
+        setLoading(false); // Terminar la carga
       }
     };
 
@@ -30,17 +35,20 @@ export function ChatAI() {
 
   // Función para encontrar respuestas basadas en la pregunta
   const handleFindAnswer = async (question) => {
-    if (!model) return; // Asegurarse de que el modelo esté cargado antes de continuar
+    if (!model) {
+      setError('El modelo no está cargado. Intenta de nuevo más tarde.');
+      return; // Asegurarse de que el modelo esté cargado antes de continuar
+    }
 
     try {
       const answers = await model.findAnswers(question, passage); // Busca respuestas
       return answers;
     } catch (error) {
       console.error('Error encontrando respuestas:', error);
+      setError('Ocurrió un error al buscar respuestas.');
       return [];
     }
   };
-
   // Enviar mensaje y obtener respuesta de la IA
   const handleSendMessage = async () => {
     if (input.trim()) {
@@ -53,7 +61,8 @@ export function ChatAI() {
 
       const answers = await handleFindAnswer(input); // Obtener la respuesta de la IA
       const aiResponse = {
-        text: answers.length > 0 ? answers[0].text : 'No se encontró respuesta.',
+        text:
+          answers.length > 0 ? answers[0].text : 'No se encontró respuesta.',
         sender: 'ai', // Mensaje de la IA
       };
 
