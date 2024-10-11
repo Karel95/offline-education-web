@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import * as qna from '@tensorflow-models/qna'; // Importa el modelo de QnA
 import '@tensorflow/tfjs-backend-cpu'; // Cargar backend CPU
 import '@tensorflow/tfjs-backend-webgl'; // Para aprovechar WebGL si está disponible
@@ -10,6 +10,7 @@ export function ChatAI() {
   const [model, setModel] = useState(null); // Almacena el modelo de QnA
   const [error, setError] = useState(null); // Almacena cualquier error durante la carga
   const [sidebarVisible, setSidebarVisible] = useState(false); // Para mostrar/ocultar el sidebar con el 'passage'
+  const endOfMessagesRef = useRef(null); // Referencia al final del chat
 
   // El 'passage' es el contexto del cual el modelo extraerá respuestas
   const passage =
@@ -68,6 +69,10 @@ export function ChatAI() {
 
       setMessages((prevMessages) => [...prevMessages, aiResponse]); // Añadir la respuesta de la IA
       setLoading(false); // Terminar la carga
+    }
+    // Scroll hacia el final del chat cuando los mensajes cambien
+    if (endOfMessagesRef.current) {
+      endOfMessagesRef.current.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
@@ -140,6 +145,8 @@ export function ChatAI() {
                 Loading...
               </div>
             )}
+            <div ref={endOfMessagesRef} />{' '}
+            {/* Punto de referencia para hacer scroll */}
           </div>
           <div className="flex items-center p-3 border-t border-gray-300">
             <input
