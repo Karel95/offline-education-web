@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import {
@@ -14,6 +14,7 @@ import SubjectsFlyout from '../../components/subjects-flyout';
 export function Navbar({ brandName, routes }) {
   const [openNav, setOpenNav] = useState(false);
   const [updateAvailable, setUpdateAvailable] = useState(false);
+  const navRef = useRef(null);
 
   useEffect(() => {
     if ('serviceWorker' in navigator) {
@@ -67,6 +68,23 @@ export function Navbar({ brandName, routes }) {
     </ul>
   );
 
+  const handleClickOutside = (event) => {
+    // Verifica si el clic fue fuera del componente
+    if (navRef.current && !navRef.current.contains(event.target)) {
+      setOpenNav(false);
+    }
+  };
+
+  useEffect(() => {
+    // Agrega el listener al documento
+    document.addEventListener('mousedown', handleClickOutside);
+
+    // Limpia el listener al desmontar el componente
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
   return (
     <MTNavbar color="transparent" className="p-3">
       <div className="container mx-auto flex items-center justify-between text-white">
@@ -93,7 +111,7 @@ export function Navbar({ brandName, routes }) {
           )}
         </IconButton>
       </div>
-      <Collapse open={openNav}>
+      <Collapse open={openNav} ref={navRef}>
         <div className="rounded-xl bg-blue-gray-900 px-4 pt-2 pb-4 text-white">
           <div className="container mx-auto">
             <SubjectsFlyout maxHeight={'200px'} />

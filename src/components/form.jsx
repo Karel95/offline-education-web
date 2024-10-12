@@ -16,10 +16,36 @@ const Form = () => {
       </PageTitle>
       <form className="mx-auto w-full mt-12 lg:w-5/12">
         <div className="mb-8 flex gap-8">
-          <Input variant="outlined" size="lg" label="Full Name" />
-          <Input variant="outlined" size="lg" label="Email Address" />
+          <label htmlFor="input-name">
+            <Input
+              id="input-name"
+              type='text'
+              variant="outlined"
+              size="lg"
+              label="Full Name"
+              required
+            />
+          </label>
+          <label htmlFor="input-email">
+            <Input
+              id="input-email"
+              type='email'
+              variant="outlined"
+              size="lg"
+              label="Email Address"
+              required
+            />
+          </label>
         </div>
-        <Textarea variant="outlined" size="lg" label="Message" rows={8} />
+        <Textarea
+          id="input-msg"
+          type='text'
+          variant="outlined"
+          size="lg"
+          label="Message"
+          rows={8}
+          required
+        />
         <Checkbox
           label={
             <Typography
