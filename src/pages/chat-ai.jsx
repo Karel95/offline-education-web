@@ -23,9 +23,9 @@ export function ChatAI() {
           modelUrl: '/models/mobilebert/model.json', // Cargando el modelo localmente
         });
         setModel(loadedModel); // Asegúrate de guardar el modelo en un estado
-        console.log('Modelo cargado correctamente:', loadedModel);
+        console.log('Model loaded correctly:', loadedModel);
       } catch (error) {
-        console.error('Error al cargar el modelo:', error);
+        console.error('Error to load the model:', error);
       }
     };
 
@@ -35,7 +35,7 @@ export function ChatAI() {
   // Función para encontrar respuestas basadas en la pregunta
   const handleFindAnswer = async (question) => {
     if (!model) {
-      setError('El modelo no está cargado. Intenta de nuevo más tarde.');
+      setError('The model is not loaded. Please, try again later.');
       return []; // Retorna un array vacío si el modelo no está cargado
     }
 
@@ -43,8 +43,8 @@ export function ChatAI() {
       const answers = await model.findAnswers(question, passage); // Busca respuestas
       return answers || []; // Si no hay respuestas, retorna un array vacío
     } catch (error) {
-      console.error('Error encontrando respuestas:', error);
-      setError('Ocurrió un error al buscar respuestas.');
+      console.error('Error finding answers:', error);
+      setError('Something went wrong when finding answers.');
       return [];
     }
   };
@@ -62,7 +62,7 @@ export function ChatAI() {
       const answers = await handleFindAnswer(input); // Obtener la respuesta de la IA
       const aiResponse = {
         text:
-          answers.length > 0 ? answers[0].text : 'No se encontró respuesta.', // Evita el error si answers es undefined
+          answers.length > 0 ? answers[0].text : 'No answers was found.', // Evita el error si answers es undefined
         sender: 'ai', // Mensaje de la IA
       };
 
