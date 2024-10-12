@@ -11,7 +11,7 @@ import {
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import SubjectsFlyout from '../../components/subjects-flyout';
 
-export function Navbar({ brandName, routes, action }) {
+export function Navbar({ brandName, routes }) {
   const [openNav, setOpenNav] = useState(false);
   const [updateAvailable, setUpdateAvailable] = useState(false);
 
@@ -19,7 +19,7 @@ export function Navbar({ brandName, routes, action }) {
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.ready.then((registration) => {
         registration.onupdatefound = () => {
-          setUpdateAvailable(true); // Notifica al usuario cuando hay una actualización disponible
+          setUpdateAvailable(true); // Notify the user when an update is available
         };
       });
     }
@@ -28,13 +28,17 @@ export function Navbar({ brandName, routes, action }) {
   const handleUpdate = async () => {
     if ('serviceWorker' in navigator) {
       const registration = await navigator.serviceWorker.ready;
-      await registration.update(); // Fuerza una actualización del SW
-      window.location.reload(); // Recarga la página para aplicar la actualización
+      await registration.update(); // Force an update of the SW
+      window.location.reload(); // Reload the page to apply the update
     }
   };
 
   useEffect(() => {
-    window.addEventListener('resize', () => window.innerWidth >= 960 && setOpenNav(false));
+    const handleResize = () => {
+      if (window.innerWidth >= 960) setOpenNav(false);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize); // Cleanup listener
   }, []);
 
   const navList = (
@@ -49,18 +53,12 @@ export function Navbar({ brandName, routes, action }) {
         >
           {href ? (
             <a href={href} target={target} className="flex items-center gap-1 p-1 font-bold">
-              {icon &&
-                React.createElement(icon, {
-                  className: 'w-[18px] h-[18px] opacity-75 mr-1',
-                })}
+              {icon && React.createElement(icon, { className: 'w-[18px] h-[18px] opacity-75 mr-1' })}
               {name}
             </a>
           ) : (
             <Link to={path} target={target} className="flex items-center gap-1 p-1 font-bold">
-              {icon &&
-                React.createElement(icon, {
-                  className: 'w-[18px] h-[18px] opacity-75 mr-1',
-                })}
+              {icon && React.createElement(icon, { className: 'w-[18px] h-[18px] opacity-75 mr-1' })}
               {name}
             </Link>
           )}
@@ -80,7 +78,6 @@ export function Navbar({ brandName, routes, action }) {
         <div className="hidden lg:block">{navList}</div>
         <div className="hidden gap-2 lg:flex">
           <SubjectsFlyout maxHeight={'400px'} />
-          {React.cloneElement(action, { className: 'hidden lg:inline-block' })}
         </div>
         <IconButton
           variant="text"
@@ -100,7 +97,6 @@ export function Navbar({ brandName, routes, action }) {
         <div className="container mx-auto">
           <SubjectsFlyout maxHeight={'200px'} />
           {navList}
-          {React.cloneElement(action, { className: 'w-full block' })}
         </div>
       </MobileNav>
 
@@ -123,7 +119,6 @@ Navbar.defaultProps = {
 Navbar.propTypes = {
   brandName: PropTypes.string,
   routes: PropTypes.arrayOf(PropTypes.object).isRequired,
-  action: PropTypes.node,
 };
 
 Navbar.displayName = '/src/widgets/layout/navbar.jsx';

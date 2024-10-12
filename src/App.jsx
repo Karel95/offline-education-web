@@ -21,9 +21,7 @@ function App() {
       {/* Mostrar Navbar si no estamos en /sign-in o /sign-up */}
       {!(pathname === '/sign-in' || pathname === '/sign-up') && (
         <div className="container absolute left-2/4 z-10 mx-auto -translate-x-2/4 p-4">
-          <Navbar routes={routes} action={
-            <button onClick={handleUpdate}>Update Online</button>  // Pasa la función handleUpdate
-          } />
+          <Navbar routes={routes} />
         </div>
       )}
 
