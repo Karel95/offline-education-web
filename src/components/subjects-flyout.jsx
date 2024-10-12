@@ -144,22 +144,6 @@ const SubjectsFlyout = ({ maxHeight }) => {
 
               {/* Sección para otros enlaces */}
               <div className="grid grid-cols-2 divide-x divide-gray-900/5 bg-gray-50 mt-4">
-                <Button variant="gradient" size="sm" fullWidth className="flex items-center justify-center gap-x-2.5 p-3 font-semibold text-gray-900 hover:bg-gray-100">
-                  <svg
-                    className="h-5 w-5 flex-none text-gray-400"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                    aria-hidden="true"
-                    data-slot="icon"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M2 10a8 8 0 1 1 16 0 8 8 0 0 1-16 0Zm6.39-2.908a.75.75 0 0 1 .766.027l3.5 2.25a.75.75 0 0 1 0 1.262l-3.5 2.25A.75.75 0 0 1 8 12.25v-4.5a.75.75 0 0 1 .39-.658Z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                  Update Online
-                </Button>
                 <Link to="/help" className="flex items-center justify-center gap-x-2.5 p-3 font-semibold text-gray-900 hover:bg-gray-100">
                   <svg
                     className="h-5 w-5 flex-none text-gray-400"
