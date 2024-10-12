@@ -1,24 +1,40 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import {
   Navbar as MTNavbar,
   MobileNav,
   Typography,
   Button,
   IconButton,
-} from "@material-tailwind/react";
-import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import SubjectsFlyout from "../../components/subjects-flyout"
+} from '@material-tailwind/react';
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
+import SubjectsFlyout from '../../components/subjects-flyout';
 
 export function Navbar({ brandName, routes, action }) {
-  const [openNav, setOpenNav] = React.useState(false);
+  const [openNav, setOpenNav] = useState(false);
+  const [updateAvailable, setUpdateAvailable] = useState(false);
 
-  React.useEffect(() => {
-    window.addEventListener(
-      "resize",
-      () => window.innerWidth >= 960 && setOpenNav(false)
-    );
+  useEffect(() => {
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.ready.then((registration) => {
+        registration.onupdatefound = () => {
+          setUpdateAvailable(true); // Notifica al usuario cuando hay una actualización disponible
+        };
+      });
+    }
+  }, []);
+
+  const handleUpdate = async () => {
+    if ('serviceWorker' in navigator) {
+      const registration = await navigator.serviceWorker.ready;
+      await registration.update(); // Fuerza una actualización del SW
+      window.location.reload(); // Recarga la página para aplicar la actualización
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('resize', () => window.innerWidth >= 960 && setOpenNav(false));
   }, []);
 
   const navList = (
@@ -32,26 +48,18 @@ export function Navbar({ brandName, routes, action }) {
           className="capitalize"
         >
           {href ? (
-            <a
-              href={href}
-              target={target}
-              className="flex items-center gap-1 p-1 font-bold"
-            >
+            <a href={href} target={target} className="flex items-center gap-1 p-1 font-bold">
               {icon &&
                 React.createElement(icon, {
-                  className: "w-[18px] h-[18px] opacity-75 mr-1",
+                  className: 'w-[18px] h-[18px] opacity-75 mr-1',
                 })}
               {name}
             </a>
           ) : (
-            <Link
-              to={path}
-              target={target}
-              className="flex items-center gap-1 p-1 font-bold"
-            >
+            <Link to={path} target={target} className="flex items-center gap-1 p-1 font-bold">
               {icon &&
                 React.createElement(icon, {
-                  className: "w-[18px] h-[18px] opacity-75 mr-1",
+                  className: 'w-[18px] h-[18px] opacity-75 mr-1',
                 })}
               {name}
             </Link>
@@ -71,10 +79,8 @@ export function Navbar({ brandName, routes, action }) {
         </Link>
         <div className="hidden lg:block">{navList}</div>
         <div className="hidden gap-2 lg:flex">
-          <SubjectsFlyout maxHeight={'400px'}/>
-          {React.cloneElement(action, {
-            className: "hidden lg:inline-block",
-          })}
+          <SubjectsFlyout maxHeight={'400px'} />
+          {React.cloneElement(action, { className: 'hidden lg:inline-block' })}
         </div>
         <IconButton
           variant="text"
@@ -90,34 +96,28 @@ export function Navbar({ brandName, routes, action }) {
           )}
         </IconButton>
       </div>
-      <MobileNav
-        className="rounded-xl bg-blue-gray-900 px-4 pt-2 pb-4 text-white"
-        open={openNav}
-      >
+      <MobileNav className="rounded-xl bg-blue-gray-900 px-4 pt-2 pb-4 text-white" open={openNav}>
         <div className="container mx-auto">
-          <SubjectsFlyout maxHeight={'200px'}/>
+          <SubjectsFlyout maxHeight={'200px'} />
           {navList}
-          {React.cloneElement(action, {
-            className: "w-full block",
-          })}
+          {React.cloneElement(action, { className: 'w-full block' })}
         </div>
       </MobileNav>
+
+      {updateAvailable && (
+        <div className="fixed bottom-4 right-4 bg-blue-500 text-white p-4 rounded">
+          <span>New update available!</span>
+          <Button variant="gradient" size="sm" fullWidth onClick={handleUpdate}>
+            Refresh to Update
+          </Button>
+        </div>
+      )}
     </MTNavbar>
   );
 }
 
 Navbar.defaultProps = {
-  brandName: "Suriname Offline Education Web",
-  action: (
-    <a
-      href="/"
-      target="_blank"
-    >
-      <Button variant="gradient" size="sm" fullWidth>
-        Update Online
-      </Button>
-    </a>
-  ),
+  brandName: 'Suriname Offline Education Web',
 };
 
 Navbar.propTypes = {
@@ -126,6 +126,6 @@ Navbar.propTypes = {
   action: PropTypes.node,
 };
 
-Navbar.displayName = "/src/widgets/layout/navbar.jsx";
+Navbar.displayName = '/src/widgets/layout/navbar.jsx';
 
 export default Navbar;

@@ -7,33 +7,31 @@ export default defineConfig({
     react(),
     VitePWA({
       workbox: {
-        maximumFileSizeToCacheInBytes: 5000000, // 4 MB (increase this as needed)
+        maximumFileSizeToCacheInBytes: 5000000, // 5 MB
+        runtimeCaching: [
+          {
+            urlPattern: ({ request }) => request.mode === 'navigate',
+            handler: 'NetworkFirst',
+            options: {
+              cacheName: 'pages-cache',
+              expiration: {
+                maxEntries: 10,
+                maxAgeSeconds: 60 * 60 * 24 * 7, // 1 week
+              },
+            },
+          },
+        ],
       },
-      includeAssets: ['img/**/*'],
+      registerType: 'autoUpdate', // Asegura que las actualizaciones se manejen automáticamente
       manifest: {
         display: 'standalone',
         display_override: ['window-controls-overlay'],
         lang: 'en',
         name: 'Suriname Offline Education Web | By KarlDev',
         short_name: 'EduWeb',
-        description:
-          'PWA for offline access to educational content in regions with limited internet.',
+        description: 'PWA for offline access to educational content in regions with limited internet.',
         theme_color: '#ffffff',
         background_color: '#000000',
-        screenshots: [
-          {
-            src: '/img/screenshots/desktop-1366x769.png',
-            sizes: '1366x769',
-            type: 'image/png',
-            form_factor: 'wide',
-          },
-          {
-            src: '/img/screenshots/mobile-247x549.png',
-            sizes: '247x549',
-            type: 'image/png',
-            form_factor: 'narrow',
-          },
-        ],
         icons: [
           {
             src: '/img/suriname-logo.png',
@@ -45,6 +43,11 @@ export default defineConfig({
       },
     }),
   ],
+  server: {
+    hmr: {
+      overlay: false, // Desactiva la superposición del Hot Module Replacement
+    },
+  },
   resolve: {
     alias: [{ find: '@', replacement: '/src' }],
   },

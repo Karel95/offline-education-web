@@ -16,40 +16,39 @@ export function ChatAI() {
   const passage =
     "Google LLC is an American multinational technology company that specializes in Internet-related services and products, which include online advertising technologies, search engine, cloud computing, software, and hardware. It is considered one of the Big Four technology companies, alongside Amazon, Apple, and Facebook. Google was founded in September 1998 by Larry Page and Sergey Brin while they were Ph.D. students at Stanford University in California. Together they own about 14 percent of its shares and control 56 percent of the stockholder voting power through supervoting stock. They incorporated Google as a California privately held company on September 4, 1998, in California. Google was then reincorporated in Delaware on October 22, 2002. An initial public offering (IPO) took place on August 19, 2004, and Google moved to its headquarters in Mountain View, California, nicknamed the Googleplex. In August 2015, Google announced plans to reorganize its various interests as a conglomerate called Alphabet Inc. Google is Alphabet's leading subsidiary and will continue to be the umbrella company for Alphabet's Internet interests. Sundar Pichai was appointed CEO of Google, replacing Larry Page who became the CEO of Alphabet.";
 
-  // Cargar el modelo de QnA cuando el componente se monte
   useEffect(() => {
     const loadModel = async () => {
       try {
-        setLoading(true); // Iniciar la carga
-        const loadedModel = await qna.load(); // Intentar cargar el modelo
-        setModel(loadedModel); // Guardar el modelo en el estado
+        const loadedModel = await qna.load({
+          modelUrl: '/models/mobilebert/model.json', // Cargando el modelo localmente
+        });
+        setModel(loadedModel); // Asegúrate de guardar el modelo en un estado
+        console.log('Modelo cargado correctamente:', loadedModel);
       } catch (error) {
-        console.error('Error al cargar el modelo QnA:', error);
-        setError('No se pudo cargar el modelo QnA desde internet.'); // Guardar el error
-      } finally {
-        setLoading(false); // Terminar la carga
+        console.error('Error al cargar el modelo:', error);
       }
     };
 
-    loadModel(); // Llama a la función para cargar el modelo
+    loadModel();
   }, []); // Solo se ejecuta una vez, al montar el componente
 
   // Función para encontrar respuestas basadas en la pregunta
   const handleFindAnswer = async (question) => {
     if (!model) {
       setError('El modelo no está cargado. Intenta de nuevo más tarde.');
-      return; // Asegurarse de que el modelo esté cargado antes de continuar
+      return []; // Retorna un array vacío si el modelo no está cargado
     }
 
     try {
       const answers = await model.findAnswers(question, passage); // Busca respuestas
-      return answers;
+      return answers || []; // Si no hay respuestas, retorna un array vacío
     } catch (error) {
       console.error('Error encontrando respuestas:', error);
       setError('Ocurrió un error al buscar respuestas.');
       return [];
     }
   };
+
   // Enviar mensaje y obtener respuesta de la IA
   const handleSendMessage = async () => {
     if (input.trim()) {
@@ -63,18 +62,19 @@ export function ChatAI() {
       const answers = await handleFindAnswer(input); // Obtener la respuesta de la IA
       const aiResponse = {
         text:
-          answers.length > 0 ? answers[0].text : 'No se encontró respuesta.',
+          answers.length > 0 ? answers[0].text : 'No se encontró respuesta.', // Evita el error si answers es undefined
         sender: 'ai', // Mensaje de la IA
       };
 
       setMessages((prevMessages) => [...prevMessages, aiResponse]); // Añadir la respuesta de la IA
       setLoading(false); // Terminar la carga
     }
-    // Scroll hacia el final del chat cuando los mensajes cambien
-    if (endOfMessagesRef.current) {
-      endOfMessagesRef.current.scrollIntoView({ behavior: 'smooth' });
-    }
   };
+
+  // Scroll hacia el final del chat cuando los mensajes cambien
+  if (endOfMessagesRef.current) {
+    endOfMessagesRef.current.scrollIntoView({ behavior: 'smooth' });
+  }
 
   // Manejar el envío al presionar la tecla "Enter"
   const handleKeyDown = (e) => {
