@@ -33,7 +33,7 @@ export function Home() {
 
       <CardsTop />
 
-      <CardsMiddle />
+      {/* <CardsMiddle /> */}
 
       <CardsBottom />
 
