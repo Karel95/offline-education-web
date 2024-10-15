@@ -1,18 +1,25 @@
 // src/pages/subjects/mathematics.jsx
 
 import React from 'react';
-import { Avatar, Typography, Button } from "@material-tailwind/react";
+import { Avatar, Typography, Button } from '@material-tailwind/react';
 import {
   MapPinIcon,
   BriefcaseIcon,
   BuildingLibraryIcon,
-} from "@heroicons/react/24/solid";
-import { Footer } from "@/widgets/layout";
+} from '@heroicons/react/24/solid';
+import { Footer } from '@/widgets/layout';
 
 const MathematicsPage = () => {
   return (
     <>
-      <section className="relative block h-[50vh]">
+      <Typography
+        variant="lead"
+        color="blue-gray"
+        className="font-bold uppercase"
+      >
+        MathematicsPage
+      </Typography>
+      {/* <section className="relative block h-[50vh]">
         <div className="bg-profile-background absolute top-0 h-full w-full bg-[url('/img/background-3.png')] bg-cover bg-center scale-105" />
         <div className="absolute top-0 h-full w-full bg-black/60 bg-cover bg-center" />
       </section>
@@ -128,9 +135,9 @@ const MathematicsPage = () => {
       </section>
       <div className="bg-white">
         <Footer />
-      </div>
+      </div> */}
     </>
-  )
+  );
 };
 
 export default MathematicsPage;

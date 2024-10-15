@@ -27,7 +27,7 @@ export default defineConfig({
         display: 'standalone',
         display_override: ['window-controls-overlay'],
         lang: 'en',
-        name: 'Suriname Offline Education Web | By KarlDev',
+        name: 'Suriname Offline Education Web',
         short_name: 'EduWeb',
         description: 'PWA for offline access to educational content in regions with limited internet.',
         theme_color: '#ffffff',
