@@ -12,18 +12,11 @@ import { Footer } from '@/widgets/layout';
 const MathematicsPage = () => {
   return (
     <>
-      <Typography
-        variant="lead"
-        color="blue-gray"
-        className="font-bold uppercase"
-      >
-        MathematicsPage
-      </Typography>
-      {/* <section className="relative block h-[50vh]">
+      <section className="relative block h-[50vh]">
         <div className="bg-profile-background absolute top-0 h-full w-full bg-[url('/img/background-3.png')] bg-cover bg-center scale-105" />
         <div className="absolute top-0 h-full w-full bg-black/60 bg-cover bg-center" />
       </section>
-      <section className="relative bg-white py-16">
+      {/* <section className="relative bg-white py-16">
         <div className="relative mb-6 -mt-40 flex w-full px-4 min-w-0 flex-col break-words bg-white">
           <div className="container mx-auto">
             <div className="flex flex-col lg:flex-row justify-between">
