@@ -7,7 +7,7 @@ export default defineConfig({
     react(),
     VitePWA({
       workbox: {
-        maximumFileSizeToCacheInBytes: 5000000, // 5 MB
+        maximumFileSizeToCacheInBytes: 50000000, // 50 MB
         runtimeCaching: [
           {
             urlPattern: ({ request }) => request.mode === 'navigate',
