@@ -42,6 +42,10 @@ export function Navbar({ brandName, routes }) {
     return () => window.removeEventListener('resize', handleResize); // Cleanup listener
   }, []);
 
+  const handleLinkClick = () => {
+    setOpenNav(false); // Close the nav when a link is clicked
+  };
+
   const navList = (
     <ul className="mb-4 mt-2 flex flex-col gap-2 text-inherit lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
       {routes.map(({ name, path, icon, href, target }) => (
@@ -53,13 +57,29 @@ export function Navbar({ brandName, routes }) {
           className="capitalize"
         >
           {href ? (
-            <a href={href} target={target} className="flex items-center gap-1 p-1 font-bold">
-              {icon && React.createElement(icon, { className: 'w-[18px] h-[18px] opacity-75 mr-1' })}
+            <a
+              href={href}
+              target={target}
+              className="flex items-center gap-1 p-1 font-bold"
+              onClick={handleLinkClick}
+            >
+              {icon &&
+                React.createElement(icon, {
+                  className: 'w-[18px] h-[18px] opacity-75 mr-1',
+                })}
               {name}
             </a>
           ) : (
-            <Link to={path} target={target} className="flex items-center gap-1 p-1 font-bold">
-              {icon && React.createElement(icon, { className: 'w-[18px] h-[18px] opacity-75 mr-1' })}
+            <Link
+              to={path}
+              target={target}
+              className="flex items-center gap-1 p-1 font-bold"
+              onClick={handleLinkClick}
+            >
+              {icon &&
+                React.createElement(icon, {
+                  className: 'w-[18px] h-[18px] opacity-75 mr-1',
+                })}
               {name}
             </Link>
           )}
