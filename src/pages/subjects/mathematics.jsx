@@ -132,10 +132,10 @@ const MathematicsPage = () => {
 
 
         </div>
-      </section>
+      </section> */}
       <div className="bg-white">
         <Footer />
-      </div> */}
+      </div>
     </>
   );
 };

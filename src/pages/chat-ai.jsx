@@ -17,20 +17,40 @@ export function ChatAI() {
     "Google LLC is an American multinational technology company that specializes in Internet-related services and products, which include online advertising technologies, search engine, cloud computing, software, and hardware. It is considered one of the Big Four technology companies, alongside Amazon, Apple, and Facebook. Google was founded in September 1998 by Larry Page and Sergey Brin while they were Ph.D. students at Stanford University in California. Together they own about 14 percent of its shares and control 56 percent of the stockholder voting power through supervoting stock. They incorporated Google as a California privately held company on September 4, 1998, in California. Google was then reincorporated in Delaware on October 22, 2002. An initial public offering (IPO) took place on August 19, 2004, and Google moved to its headquarters in Mountain View, California, nicknamed the Googleplex. In August 2015, Google announced plans to reorganize its various interests as a conglomerate called Alphabet Inc. Google is Alphabet's leading subsidiary and will continue to be the umbrella company for Alphabet's Internet interests. Sundar Pichai was appointed CEO of Google, replacing Larry Page who became the CEO of Alphabet.";
 
   useEffect(() => {
+    let isComponentMounted = true;
+
     const loadModel = async () => {
+      if (model) return; // Prevent reloading the model if it's already loaded
+      setLoading(true); // Start loading indicator
       try {
         const loadedModel = await qna.load({
-          modelUrl: '/models/mobilebert/model.json', // Cargando el modelo localmente
+          modelUrl: '/models/mobilebert/model.json', // Load the local model
         });
-        setModel(loadedModel); // Asegúrate de guardar el modelo en un estado
-        console.log('Model loaded correctly:', loadedModel);
+
+        if (isComponentMounted) {
+          setModel(loadedModel); // Store the loaded model
+          console.log('Model loaded correctly:', loadedModel);
+        }
       } catch (error) {
-        console.error('Error to load the model:', error);
+        console.error('Error loading the model:', error);
+      } finally {
+        if (isComponentMounted) {
+          setLoading(false); // End loading indicator
+        }
       }
     };
 
     loadModel();
-  }, []); // Solo se ejecuta una vez, al montar el componente
+
+    return () => {
+      isComponentMounted = false; // Component unmounted
+      if (model) {
+        model.dispose(); // Dispose of the model to free up memory
+        tf.engine().disposeVariables(); // Dispose of TensorFlow.js variables from memory
+        console.log('Model disposed');
+      }
+    };
+  }, []); // Only return the effect if the model is null
 
   // Función para encontrar respuestas basadas en la pregunta
   const handleFindAnswer = async (question) => {
@@ -61,8 +81,7 @@ export function ChatAI() {
 
       const answers = await handleFindAnswer(input); // Obtener la respuesta de la IA
       const aiResponse = {
-        text:
-          answers.length > 0 ? answers[0].text : 'No answers was found.', // Evita el error si answers es undefined
+        text: answers.length > 0 ? answers[0].text : 'No answers was found.', // Evita el error si answers es undefined
         sender: 'ai', // Mensaje de la IA
       };
 
