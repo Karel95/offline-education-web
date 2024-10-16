@@ -154,7 +154,7 @@ Footer.defaultProps = {
         rel="noopener noreferrer"
         className="text-blue-gray-500 transition-colors hover:text-blue-500"
       >
-        KarlDev
+        TechMentors
       </a>
       .
     </>

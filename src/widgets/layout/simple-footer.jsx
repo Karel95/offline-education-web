@@ -41,7 +41,7 @@ export function SimpleFooter({ brandName, brandLink, routes }) {
 }
 
 SimpleFooter.defaultProps = {
-  brandName: " KarlDev",
+  brandName: " TechMentors",
   brandLink: "https://karldev95.netlify.app/",
   routes: [
     { name: "KarlDev", path: "https://karldev95.netlify.app/" },

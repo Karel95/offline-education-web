@@ -106,7 +106,7 @@ export function Navbar({ brandName, routes }) {
   }, []);
 
   return (
-    <MTNavbar color="transparent" className="p-3">
+    <MTNavbar color="transparent" className="p-3 backdrop-blur-sm bg-black/40 bg-opacity-50">
       <div className="container mx-auto flex items-center justify-between text-white">
         <Link to="/">
           <Typography className="mr-4 ml-2 cursor-pointer py-1.5 font-bold">
