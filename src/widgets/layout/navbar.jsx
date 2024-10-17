@@ -10,11 +10,14 @@ import {
 } from '@material-tailwind/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import SubjectsFlyout from '../../components/subjects-flyout';
+import InstallBtn from '@/components/install-btn';
 
 export function Navbar({ brandName, routes }) {
   const [openNav, setOpenNav] = useState(false);
   const [updateAvailable, setUpdateAvailable] = useState(false);
   const navRef = useRef(null);
+  const [deferredPrompt, setDeferredPrompt] = useState(null);
+  const [installable, setInstallable] = useState(false);
 
   useEffect(() => {
     if ('serviceWorker' in navigator) {
@@ -105,14 +108,69 @@ export function Navbar({ brandName, routes }) {
     };
   }, []);
 
+  useEffect(() => {
+    const handleBeforeInstallPrompt = (e) => {
+      e.preventDefault();
+      setDeferredPrompt(e);
+      setInstallable(true);
+      console.log('Deferred Prompt saved:', e); // Add this log
+    };
+
+    window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+
+    return () => {
+      window.removeEventListener(
+        'beforeinstallprompt',
+        handleBeforeInstallPrompt,
+      );
+    };
+  }, []);
+
+  const handleInstallClick = () => {
+    if (deferredPrompt) {
+      console.log('Triggering prompt...');
+      deferredPrompt.prompt();
+
+      deferredPrompt.userChoice.then((choiceResult) => {
+        if (choiceResult.outcome === 'accepted') {
+          console.log('User accepted the PWA install');
+        } else {
+          console.log('User dismissed the PWA install');
+        }
+        setDeferredPrompt(null);
+        setInstallable(false);
+      });
+    } else {
+      console.log('No deferredPrompt available');
+    }
+  };
+
+  useEffect(() => {
+    if (!window.BeforeInstallPromptEvent) {
+      console.log('Browser does not support beforeinstallprompt event');
+      setInstallable(false);
+    }
+  }, []);
+
   return (
-    <MTNavbar color="transparent" className="p-3 backdrop-blur-sm bg-black/40 bg-opacity-50">
+    <MTNavbar
+      color="transparent"
+      className="p-3 backdrop-blur-sm bg-black/40 bg-opacity-50"
+    >
       <div className="container mx-auto flex items-center justify-between text-white">
         <Link to="/">
           <Typography className="mr-4 ml-2 cursor-pointer py-1.5 font-bold">
             {brandName}
           </Typography>
         </Link>
+        {installable && (
+          <InstallBtn
+            id="install-btn"
+            className="install-btn"
+            onClick={handleInstallClick}
+          />
+        )}
+
         <div className="hidden lg:block">{navList}</div>
         <div className="hidden gap-2 lg:flex">
           <SubjectsFlyout maxHeight={'400px'} />
@@ -153,7 +211,7 @@ export function Navbar({ brandName, routes }) {
 }
 
 Navbar.defaultProps = {
-  brandName: 'Suriname Offline Education Web',
+  brandName: 'EduWeb',
 };
 
 Navbar.propTypes = {
