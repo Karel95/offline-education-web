@@ -1,5 +1,5 @@
 //src/routes/routes.jsx
-import { Home, ChatAI, SignIn, SignUp } from "@/pages";
+import { Home, ChatAI, SignIn, SignUp, Profile } from "@/pages";
 
 export const routes = [
   {
@@ -23,10 +23,9 @@ export const routes = [
     element: <SignUp />,
   },
   {
-    name: "Docs",
-    href: "docs",
-    target: "_blank",
-    element: "",
+    name: "Profile",
+    path: "/profile",
+    element: <Profile />,
   },
 ];
 
