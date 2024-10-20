@@ -6,17 +6,18 @@ import {
 } from '@heroicons/react/24/solid';
 import { Footer } from '@/widgets/layout';
 import React, { useEffect, useState } from 'react';
+import { number } from 'prop-types';
 const backendUrl = import.meta.env.VITE_BACKEND_URL;
 const token = import.meta.env.VITE_BACKEND_TOKEN;
-//const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZW1haWwiOiJxd2VydEBhc2RmLnp4YyIsImlhdCI6MTcyOTM1MDA1NSwiZXhwIjoxNzI5MzUzNjU1fQ.porFuYfMb0fCpHHpf5nxFrg7Irc90yNqiUCTlV3Zk_E'
 
 export function Profile() {
   const [email, setEmail] = useState('');
+  const [userId, setUserId] = useState(null);
 
   // Función para obtener el email del usuario
-  const fetchUserEmail = async () => {
+  const fetchUserEmail = async (id) => {
     try {
-      const response = await fetch(`${backendUrl}/users/1`, {
+      const response = await fetch(`${backendUrl}/users/${id}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -37,8 +38,15 @@ export function Profile() {
 
   // Ejecutar la función cuando el componente se monte
   useEffect(() => {
-    fetchUserEmail();
-    console.log('Backend URL:', backendUrl); // Asegúrate de que backendUrl sea correcto
+    let id = prompt('Insert the user ID please');
+    id = parseInt(id, 10); // Convert to a number
+
+    if (isNaN(id) || id <= 0) {
+      alert('Invalid User ID. Please enter a positive number.');
+    } else {
+      setUserId(id); // Set user ID state
+      fetchUserEmail(id); // Fetch the email for the valid user ID
+    }
   }, []); // El array vacío [] asegura que se ejecute solo una vez al montar el componente
 
   return (
