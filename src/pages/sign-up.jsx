@@ -50,12 +50,13 @@ export function SignUp() {
 
       // Save the token (optional)
       localStorage.setItem('token', result.token);
+      localStorage.setItem('userId', result.user.id);
 
       // Set success message
       setSuccess('Sign up exitoso');
 
       // Navigate to the homepage
-      navigate('/home');
+      navigate('/profile');
     } catch (err) {
       setError(err.message); // Handle and display errors
     }

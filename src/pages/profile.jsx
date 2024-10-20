@@ -8,46 +8,49 @@ import { Footer } from '@/widgets/layout';
 import React, { useEffect, useState } from 'react';
 import { number } from 'prop-types';
 const backendUrl = import.meta.env.VITE_BACKEND_URL;
-const token = import.meta.env.VITE_BACKEND_TOKEN;
 
 export function Profile() {
   const [email, setEmail] = useState('');
-  const [userId, setUserId] = useState(null);
+  const [name, setName] = useState('');
+  const [error, setError] = useState(null);
 
-  // Función para obtener el email del usuario
-  const fetchUserEmail = async (id) => {
+  // Function to fetch user details (name and email)
+  const fetchUserProfile = async (id) => {
+    const token = localStorage.getItem('token'); // Get token from localStorage
+    if (!token) {
+      console.error('No token found');
+      return;
+    }
     try {
       const response = await fetch(`${backendUrl}/users/${id}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`,
+          Authorization: `Bearer ${token}`,
         },
       });
 
       if (response.ok) {
         const data = await response.json();
-        setEmail(data.email); // Aquí se espera que la API devuelva un objeto con el email
+        setEmail(data.email); // Set the email from the response
+        setName(data.name); // Set the name from the response
       } else {
-        console.error('Error al obtener el email');
+        console.error('Error fetching user details');
       }
     } catch (error) {
       console.error('Error:', error);
     }
   };
 
-  // Ejecutar la función cuando el componente se monte
+  // Fetch user profile when component mounts
   useEffect(() => {
-    let id = prompt('Insert the user ID please');
-    id = parseInt(id, 10); // Convert to a number
-
-    if (isNaN(id) || id <= 0) {
-      alert('Invalid User ID. Please enter a positive number.');
+    const id = localStorage.getItem('userId'); // Obtener el userId de localStorage
+    if (id) {
+      fetchUserProfile(id); // Fetch user profile
     } else {
-      setUserId(id); // Set user ID state
-      fetchUserEmail(id); // Fetch the email for the valid user ID
+      setError('User ID not found');
     }
-  }, []); // El array vacío [] asegura que se ejecute solo una vez al montar el componente
+  }, []); // Empty dependency array ensures it runs once on mount
 
   return (
     <>
@@ -70,14 +73,14 @@ export function Profile() {
                 </div>
                 <div className="flex flex-col mt-2">
                   <Typography variant="h4" color="blue-gray">
-                    John Doe
+                    {name ? name : 'John Doe'}
                   </Typography>
                   <Typography
                     variant="h4"
                     color="gray"
                     className="!mt-0 font-normal"
                   >
-                    {email ? `Email: ${email}` : 'johndoe@mail.com'}
+                    {email ? email : 'johndoe@mail.com'}
                   </Typography>
                 </div>
               </div>

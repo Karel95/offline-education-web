@@ -38,13 +38,14 @@ export function SignIn() {
 
       // Save the token in localStorage or cookies (optional)
       localStorage.setItem('token', data.token);
+      localStorage.setItem('userId', result.user.id);
 
       // Set success message
       setSuccess('Login exitoso');
       setError(null);
 
       // Navigate to a different page after successful login (e.g., home page)
-      navigate('/home');
+      navigate('/profile');
     } catch (err) {
       setError(err.message);
       setSuccess(null);
