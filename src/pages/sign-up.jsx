@@ -34,7 +34,7 @@ export function SignUp() {
             <Typography
               variant="small"
               color="blue-gray"
-              className="-mb-3 font-medium"
+              className="-mb-7 font-medium"
             >
               Your name
             </Typography>
@@ -52,7 +52,7 @@ export function SignUp() {
             <Typography
               variant="small"
               color="blue-gray"
-              className="-mb-3 font-medium"
+              className="-mb-7 font-medium"
             >
               Your email
             </Typography>
