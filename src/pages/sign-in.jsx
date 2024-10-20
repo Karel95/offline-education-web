@@ -38,7 +38,7 @@ export function SignIn() {
 
       // Save the token in localStorage or cookies (optional)
       localStorage.setItem('token', data.token);
-      localStorage.setItem('userId', result.user.id);
+      localStorage.setItem('userId', data.id);
 
       // Set success message
       setSuccess('Login exitoso');
