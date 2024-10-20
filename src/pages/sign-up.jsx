@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Input, Checkbox, Button, Typography } from '@material-tailwind/react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export function SignUp() {
   const [showPassword, setShowPassword] = useState(false); // State to manage password visibility
@@ -8,19 +8,20 @@ export function SignUp() {
   const [email, setEmail] = useState(''); // Estado para el email
   const [password, setPassword] = useState(''); // Estado para la contraseña
   const [error, setError] = useState(null); // Estado para manejar errores
+  const [success, setSuccess] = useState(null); // For success message
+  const navigate = useNavigate(); // For navigation after login success
 
   const togglePasswordVisibility = () => {
     setShowPassword((prev) => !prev);
   };
 
   const handleSubmit = async (event) => {
-    event.preventDefault(); // Evitar que la página se recargue al enviar el formulario
+    event.preventDefault(); // Prevent the page from reloading
 
     try {
       const response = await fetch(
         'https://node-auth-jwt-api-rest-tsc-production.up.railway.app/auth/register',
         {
-          // Cambia la URL según la ruta de tu API
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -33,21 +34,30 @@ export function SignUp() {
         },
       );
 
+      // Parse the response if it is successful
+      const result = await response.json();
+
       if (!response.ok) {
-        const data = await response.json();
-        throw new Error(data.message || 'Error al registrar usuario');
+        throw new Error(result.message || 'Error al registrar usuario');
       }
 
-      const result = await response.json();
       console.log('Usuario creado con éxito:', result);
 
-      // Limpiar el formulario y mostrar un mensaje de éxito si es necesario
+      // Clean the form and handle success
       setName('');
       setEmail('');
       setPassword('');
-      setError(null);
+
+      // Save the token (optional)
+      localStorage.setItem('token', result.token);
+
+      // Set success message
+      setSuccess('Sign up exitoso');
+
+      // Navigate to the homepage
+      navigate('/home');
     } catch (err) {
-      setError(err.message); // Manejar los errores y mostrar un mensaje
+      setError(err.message); // Handle and display errors
     }
   };
 
@@ -64,8 +74,18 @@ export function SignUp() {
           <Typography variant="h2" className="font-bold mb-4">
             Join Us Today
           </Typography>
-          {error && <Typography color="red">{error}</Typography>}{' '}
-          {/* Mostrar el error si existe */}
+          {error && (
+            <Typography color="red" variant="small">
+              {error}
+            </Typography>
+          )}{' '}
+          {/* Display error */}
+          {success && (
+            <Typography color="green" variant="small">
+              {success}
+            </Typography>
+          )}{' '}
+          {/* Display success */}
           <Typography
             variant="paragraph"
             color="blue-gray"
