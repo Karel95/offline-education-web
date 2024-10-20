@@ -23,6 +23,7 @@
     "@rollup/plugin-typescript": "3.1.1",
     "@tailwindcss/forms": "^0.5.9",
     "@tensorflow/tfjs-backend-cpu": "^4.21.0",
+    "@types/cors": "^2.8.17",
     "@types/react": "18.2.31",
     "@types/react-dom": "18.2.14",
     "@vitejs/plugin-react": "4.1.0",

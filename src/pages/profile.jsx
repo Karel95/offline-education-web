@@ -5,8 +5,42 @@ import {
   BuildingLibraryIcon,
 } from '@heroicons/react/24/solid';
 import { Footer } from '@/widgets/layout';
+import React, { useEffect, useState } from 'react';
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
+const token = import.meta.env.VITE_BACKEND_TOKEN;
+//const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZW1haWwiOiJxd2VydEBhc2RmLnp4YyIsImlhdCI6MTcyOTM1MDA1NSwiZXhwIjoxNzI5MzUzNjU1fQ.porFuYfMb0fCpHHpf5nxFrg7Irc90yNqiUCTlV3Zk_E'
 
 export function Profile() {
+  const [email, setEmail] = useState('');
+
+  // Función para obtener el email del usuario
+  const fetchUserEmail = async () => {
+    try {
+      const response = await fetch(`${backendUrl}/users/1`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setEmail(data.email); // Aquí se espera que la API devuelva un objeto con el email
+      } else {
+        console.error('Error al obtener el email');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
+  // Ejecutar la función cuando el componente se monte
+  useEffect(() => {
+    fetchUserEmail();
+    console.log('Backend URL:', backendUrl); // Asegúrate de que backendUrl sea correcto
+  }, []); // El array vacío [] asegura que se ejecute solo una vez al montar el componente
+
   return (
     <>
       <section className="relative block h-[50vh]">
@@ -31,11 +65,11 @@ export function Profile() {
                     John Doe
                   </Typography>
                   <Typography
-                    variant="paragraph"
+                    variant="h4"
                     color="gray"
                     className="!mt-0 font-normal"
                   >
-                    johndoe@mail.com
+                    {email ? `Email: ${email}` : 'johndoe@mail.com'}
                   </Typography>
                 </div>
               </div>
