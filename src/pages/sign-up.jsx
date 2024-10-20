@@ -4,10 +4,53 @@ import { Link } from 'react-router-dom';
 
 export function SignUp() {
   const [showPassword, setShowPassword] = useState(false); // State to manage password visibility
+  const [name, setName] = useState(''); // Estado para el nombre
+  const [email, setEmail] = useState(''); // Estado para el email
+  const [password, setPassword] = useState(''); // Estado para la contraseña
+  const [error, setError] = useState(null); // Estado para manejar errores
 
   const togglePasswordVisibility = () => {
     setShowPassword((prev) => !prev);
   };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault(); // Evitar que la página se recargue al enviar el formulario
+
+    try {
+      const response = await fetch(
+        'https://node-auth-jwt-api-rest-tsc-production.up.railway.app/auth/register',
+        {
+          // Cambia la URL según la ruta de tu API
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            name,
+            email,
+            password,
+          }),
+        },
+      );
+
+      if (!response.ok) {
+        const data = await response.json();
+        throw new Error(data.message || 'Error al registrar usuario');
+      }
+
+      const result = await response.json();
+      console.log('Usuario creado con éxito:', result);
+
+      // Limpiar el formulario y mostrar un mensaje de éxito si es necesario
+      setName('');
+      setEmail('');
+      setPassword('');
+      setError(null);
+    } catch (err) {
+      setError(err.message); // Manejar los errores y mostrar un mensaje
+    }
+  };
+
   return (
     <section className="m-8 flex">
       <div className="w-2/5 h-full hidden lg:block">
@@ -21,6 +64,8 @@ export function SignUp() {
           <Typography variant="h2" className="font-bold mb-4">
             Join Us Today
           </Typography>
+          {error && <Typography color="red">{error}</Typography>}{' '}
+          {/* Mostrar el error si existe */}
           <Typography
             variant="paragraph"
             color="blue-gray"
@@ -29,7 +74,10 @@ export function SignUp() {
             Enter your email and password to register.
           </Typography>
         </div>
-        <form className="mt-8 mb-2 mx-auto w-80 max-w-screen-lg lg:w-1/2">
+        <form
+          className="mt-8 mb-2 mx-auto w-80 max-w-screen-lg lg:w-1/2"
+          onSubmit={handleSubmit}
+        >
           <div className="mb-1 flex flex-col gap-6">
             <Typography
               variant="small"
@@ -42,6 +90,8 @@ export function SignUp() {
               size="lg"
               placeholder="Enter your name"
               className="!border-t-blue-gray-200 focus:!border-t-gray-900"
+              value={name}
+              onChange={(e) => setName(e.target.value)} // Actualiza el estado del nombre
               labelProps={{
                 className: 'before:content-none after:content-none',
               }}
@@ -61,6 +111,8 @@ export function SignUp() {
               size="lg"
               placeholder="name@mail.com"
               className="!border-t-blue-gray-200 focus:!border-t-gray-900"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)} // Actualiza el estado del email
               labelProps={{
                 className: 'before:content-none after:content-none',
               }}
@@ -84,6 +136,8 @@ export function SignUp() {
                 type={showPassword ? 'text' : 'password'} // Set type based on state
                 placeholder="Password"
                 className="!border-t-blue-gray-200 focus:!border-t-gray-900 pr-10" // Adjust padding for button space
+                value={password}
+                onChange={(e) => setPassword(e.target.value)} // Actualiza el estado de la contraseña
                 labelProps={{
                   className: 'before:content-none after:content-none',
                 }}
@@ -119,7 +173,7 @@ export function SignUp() {
             containerProps={{ className: '-ml-2.5' }}
           />
 
-          <Button className="mt-6" fullWidth>
+          <Button className="mt-6" fullWidth type="submit">
             Register Now
           </Button>
 
