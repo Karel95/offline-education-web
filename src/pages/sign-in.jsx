@@ -30,24 +30,6 @@ export function SignIn() {
               color="blue-gray"
               className="-mb-7 font-medium"
             >
-              Your name
-            </Typography>
-            <Input
-              size="lg"
-              placeholder="Enter your name"
-              className="!border-t-blue-gray-200 focus:!border-t-gray-900"
-              labelProps={{
-                className: 'before:content-none after:content-none',
-              }}
-            />
-          </div>
-
-          <div className="mb-1 flex flex-col gap-6">
-            <Typography
-              variant="small"
-              color="blue-gray"
-              className="-mb-7 font-medium"
-            >
               Your email
             </Typography>
             <Input
