@@ -2,7 +2,6 @@ import React from 'react';
 import { Typography } from '@material-tailwind/react';
 import { Footer } from '@/widgets/layout';
 import Form from '@/components/form';
-import ContactForm from '@/components/form-test';
 import { CardsBottom, CardsMiddle, CardsTop } from './home/cards';
 
 export function Home() {
@@ -38,7 +37,7 @@ export function Home() {
 
       <CardsBottom />
 
-      <ContactForm />
+      <Form />
 
       <Footer />
     </>
