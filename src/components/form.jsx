@@ -69,8 +69,8 @@ const Form = () => {
               {/* <label htmlFor="name">Email:</label> */}
               <Input
                 type="email"
-                name="name"
-                id="name"
+                name="email"
+                id="email"
                 variant="outlined"
                 size="lg"
                 label="Email Address"
