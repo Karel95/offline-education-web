@@ -7,7 +7,8 @@ import {
 import { Footer } from '@/widgets/layout';
 import React, { useEffect, useState } from 'react';
 import { number } from 'prop-types';
-const backendUrl = import.meta.env.VITE_BACKEND_URL;
+//const backendUrl = import.meta.env.VITE_BACKEND_URL;
+const backendUrl = 'https://node-auth-jwt-api-rest-tsc-production.up.railway.app';
 
 export function Profile() {
   const [email, setEmail] = useState('');
