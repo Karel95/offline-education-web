@@ -31,7 +31,7 @@ const Form = () => {
               <PageTitle section="Contact Us" heading="Want to work with us?">
                 Complete this form and we will get back to you in 24 hours.
               </PageTitle>
-              <div className="mb-8 gap-8">
+              <div className="mb-8 flex gap-8">
                 <Input
                   type="text"
                   name="name"
