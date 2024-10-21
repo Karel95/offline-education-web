@@ -6,7 +6,8 @@ import {
   Textarea,
   Checkbox,
 } from '@material-tailwind/react';
-import React, { useState } from 'react';
+import React, { useState, Component } from 'react';
+import { NetlifyForm, Honeypot } from 'react-netlify-forms';
 
 const Form = () => {
   const [formData, setFormData] = useState({
@@ -40,100 +41,164 @@ const Form = () => {
   };
 
   return (
-    <>
-      <PageTitle section="Contact Us" heading="Want to work with us?">
-        Complete this form and we will get back to you in 24 hours.
-      </PageTitle>
-      <form
-        className="mx-auto w-full mt-12 lg:w-5/12"
-        name="contact"
-        method="POST"
-        data-netlify="true"
-        data-netlify-honeypot="bot-field"
-        onSubmit={handleSubmit}
-      >
-        {/* Campo oculto requerido por Netlify */}
-        <input type="hidden" name="form-name" value="contact" />
-
-        {/* Campo honeypot oculto para evitar bots */}
-        <p className="hidden">
-          <label>
-            Don’t fill this out if you’re human: <input name="bot-field" />
-          </label>
-        </p>
-
-        <div className="mb-8 flex gap-8">
-          <label htmlFor="fullName">
-            <Input
-              id="fullName"
-              name="fullName"
-              type="text"
-              variant="outlined"
+    <NetlifyForm name="Contact" action="/thanks" honeypotName="bot-field">
+      {({ handleChange, success, error }) => (
+        <div className="mx-auto lg:w-6/12">
+          <Honeypot />
+          {success && <p>Thanks for contacting us!</p>}
+          {error && (
+            <p>
+              Sorry, we could not reach our servers. Please try again later.
+            </p>
+          )}
+          <div className="w-full mt-12 lg:w-12/12">
+            <PageTitle section="Contact Us" heading="Want to work with us?">
+              Complete this form and we will get back to you in 24 hours.
+            </PageTitle>
+            <div className="mb-8 gap-8">
+              <label htmlFor="name">Name:</label>
+              <Input
+                type="text"
+                name="name"
+                id="name"
+                variant="outlined"
+                size="lg"
+                label="Full Name"
+                onChange={handleChange}
+              />
+              <label htmlFor="name">Email:</label>
+              <Input
+                type="email"
+                name="name"
+                id="name"
+                variant="outlined"
+                size="lg"
+                label="Email Address"
+                onChange={handleChange}
+              />
+            </div>
+            <div>
+              <label htmlFor="message">Message:</label>
+              <Textarea
+                type="text"
+                name="message"
+                id="message"
+                variant="outlined"
+                size="lg"
+                label="Message"
+                rows="4"
+                onChange={handleChange}
+              />
+            </div>
+          </div>
+          <div>
+            <Button
+              variant="gradient"
               size="lg"
-              label="Full Name"
-              value={formData.fullName}
-              onChange={handleChange}
-              required
-            />
-          </label>
-          <label htmlFor="email">
-            <Input
-              id="email"
-              name="email"
-              type="email"
-              variant="outlined"
-              size="lg"
-              label="Email Address"
-              value={formData.email}
-              onChange={handleChange}
-              required
-            />
-          </label>
-        </div>
-        <Textarea
-          id="message"
-          name="message"
-          variant="outlined"
-          size="lg"
-          label="Message"
-          rows={8}
-          value={formData.message}
-          onChange={handleChange}
-          required
-        />
-        <Checkbox
-          id="agreed"
-          name="agreed"
-          checked={formData.agreed}
-          onChange={handleChange}
-          label={
-            <Typography
-              variant="small"
-              color="gray"
-              className="flex items-center font-normal"
+              className="mt-8"
+              fullWidth
+              type="submit"
             >
-              I agree the
-              <a
-                href=""
-                className="font-medium transition-colors hover:text-gray-900"
-              >
-                &nbsp;Terms and Conditions
-              </a>
-            </Typography>
-          }
-          containerProps={{ className: '-ml-2.5' }}
-        />
-        <Button
-          variant="gradient"
-          size="lg"
-          className="mt-8"
-          fullWidth
-          type="submit"
-        >
-          Send Message
-        </Button>
-      </form>
-    </>
+              Submit
+            </Button>
+          </div>
+        </div>
+      )}
+    </NetlifyForm>
+    // <>
+    //   <PageTitle section="Contact Us" heading="Want to work with us?">
+    //     Complete this form and we will get back to you in 24 hours.
+    //   </PageTitle>
+    //   <form
+    //     className="mx-auto w-full mt-12 lg:w-5/12"
+    //     name="contact"
+    //     method="POST"
+    //     data-netlify="true"
+    //     data-netlify-honeypot="bot-field"
+    //     onSubmit={handleSubmit}
+    //   >
+    //     {/* Campo oculto requerido por Netlify */}
+    //     <input type="hidden" name="form-name" value="contact" />
+
+    //     {/* Campo honeypot oculto para evitar bots */}
+    //     <p className="hidden">
+    //       <label>
+    //         Don’t fill this out if you’re human: <input name="bot-field" />
+    //       </label>
+    //     </p>
+
+    //     <div className="mb-8 flex gap-8">
+    //       <label htmlFor="fullName">
+    //         <Input
+    //           id="fullName"
+    //           name="fullName"
+    //           type="text"
+    //           variant="outlined"
+    //           size="lg"
+    //           label="Full Name"
+    //           value={formData.fullName}
+    //           onChange={handleChange}
+    //           required
+    //         />
+    //       </label>
+    //       <label htmlFor="email">
+    //         <Input
+    //           id="email"
+    //           name="email"
+    //           type="email"
+    //           variant="outlined"
+    //           size="lg"
+    //           label="Email Address"
+    //           value={formData.email}
+    //           onChange={handleChange}
+    //           required
+    //         />
+    //       </label>
+    //     </div>
+    //     <Textarea
+    //       id="message"
+    //       name="message"
+    //       variant="outlined"
+    //       size="lg"
+    //       label="Message"
+    //       rows={8}
+    //       value={formData.message}
+    //       onChange={handleChange}
+    //       required
+    //     />
+    //     <Checkbox
+    //       id="agreed"
+    //       name="agreed"
+    //       checked={formData.agreed}
+    //       onChange={handleChange}
+    //       label={
+    //         <Typography
+    //           variant="small"
+    //           color="gray"
+    //           className="flex items-center font-normal"
+    //         >
+    //           I agree the
+    //           <a
+    //             href=""
+    //             className="font-medium transition-colors hover:text-gray-900"
+    //           >
+    //             &nbsp;Terms and Conditions
+    //           </a>
+    //         </Typography>
+    //       }
+    //       containerProps={{ className: '-ml-2.5' }}
+    //     />
+    //     <Button
+    //       variant="gradient"
+    //       size="lg"
+    //       className="mt-8"
+    //       fullWidth
+    //       type="submit"
+    //     >
+    //       Send Message
+    //     </Button>
+    //   </form>
+    // </>
   );
 };
 
