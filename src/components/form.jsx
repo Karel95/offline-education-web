@@ -6,7 +6,7 @@ import {
   Textarea,
   Checkbox,
 } from '@material-tailwind/react';
-import React from 'react';
+import React, { Component } from 'react';
 import { NetlifyForm, Honeypot } from 'react-netlify-forms';
 
 const Form = () => {
@@ -14,6 +14,7 @@ const Form = () => {
     <NetlifyForm
       name="Contact"
       netlify
+      action='/thanks'
       honeypotName="bot-field"
     >
       {({ handleChange, success, error }) => (
