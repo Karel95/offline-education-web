@@ -13,7 +13,6 @@ const Form = () => {
   return (
     <NetlifyForm
       name="Contact"
-      action="/thanks"
       netlify
       honeypotName="bot-field"
     >
