@@ -9,11 +9,9 @@ import {
 import React, { Component } from 'react';
 import { NetlifyForm, Honeypot } from 'react-netlify-forms';
 
-const Form = () => {
-  return (
+const Form = () => (
     <NetlifyForm
       name="Contact"
-      netlify
       action='/thanks'
       honeypotName="bot-field"
     >
@@ -79,6 +77,5 @@ const Form = () => {
       )}
     </NetlifyForm>
   );
-};
 
 export default Form;
