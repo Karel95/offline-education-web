@@ -10,35 +10,35 @@ import React, { useState, Component } from 'react';
 import { NetlifyForm, Honeypot } from 'react-netlify-forms';
 
 const Form = () => {
-  const [formData, setFormData] = useState({
-    fullName: '',
-    email: '',
-    message: '',
-    agreed: false,
-  });
+  // const [formData, setFormData] = useState({
+  //   fullName: '',
+  //   email: '',
+  //   message: '',
+  //   agreed: false,
+  // });
 
-  const handleChange = (e) => {
-    const { id, value, type, checked } = e.target;
-    setFormData({
-      ...formData,
-      [id]: type === 'checkbox' ? checked : value,
-    });
-  };
+  // const handleChange = (e) => {
+  //   const { id, value, type, checked } = e.target;
+  //   setFormData({
+  //     ...formData,
+  //     [id]: type === 'checkbox' ? checked : value,
+  //   });
+  // };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const form = e.target;
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   const form = e.target;
 
-    const data = new FormData(form);
+  //   const data = new FormData(form);
 
-    fetch('/', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: new URLSearchParams(data).toString(),
-    })
-      .then(() => alert('Formulario enviado con éxito'))
-      .catch((error) => alert('Error al enviar el formulario', error));
-  };
+  //   fetch('/', {
+  //     method: 'POST',
+  //     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+  //     body: new URLSearchParams(data).toString(),
+  //   })
+  //     .then(() => alert('Formulario enviado con éxito'))
+  //     .catch((error) => alert('Error al enviar el formulario', error));
+  // };
 
   return (
     <NetlifyForm name="Contact" action="/thanks" honeypotName="bot-field">
@@ -56,7 +56,7 @@ const Form = () => {
               Complete this form and we will get back to you in 24 hours.
             </PageTitle>
             <div className="mb-8 gap-8">
-              <label htmlFor="name">Name:</label>
+              {/* <label htmlFor="name">Name:</label> */}
               <Input
                 type="text"
                 name="name"
@@ -66,7 +66,7 @@ const Form = () => {
                 label="Full Name"
                 onChange={handleChange}
               />
-              <label htmlFor="name">Email:</label>
+              {/* <label htmlFor="name">Email:</label> */}
               <Input
                 type="email"
                 name="name"
@@ -78,7 +78,7 @@ const Form = () => {
               />
             </div>
             <div>
-              <label htmlFor="message">Message:</label>
+              {/* <label htmlFor="message">Message:</label> */}
               <Textarea
                 type="text"
                 name="message"
