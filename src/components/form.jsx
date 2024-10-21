@@ -41,7 +41,7 @@ const Form = () => {
   // };
 
   return (
-    <NetlifyForm name="Contact" action="/thanks" honeypotName="bot-field">
+    <NetlifyForm name="Contact" honeypotName="bot-field">
       {({ handleChange, success, error }) => (
         <div className="mx-auto lg:w-6/12">
           <Honeypot />
