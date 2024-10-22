@@ -63,7 +63,7 @@ export function Navbar({ brandName, routes }) {
             <a
               href={href}
               target={target}
-              className="flex items-center gap-1 p-1 font-bold"
+              className="flex items-center gap-1 p-2 font-bold hover:bg-blue-500 hover:text-white rounded transition duration-200"
               onClick={handleLinkClick}
             >
               {icon &&
@@ -76,7 +76,7 @@ export function Navbar({ brandName, routes }) {
             <Link
               to={path}
               target={target}
-              className="flex items-center gap-1 p-1 font-bold"
+              className="flex items-center gap-1 p-2 font-bold hover:bg-blue-500 hover:text-white rounded transition duration-200"
               onClick={handleLinkClick}
             >
               {icon &&
@@ -159,14 +159,14 @@ export function Navbar({ brandName, routes }) {
     >
       <div className="container mx-auto flex items-center justify-between text-white">
         <Link to="/">
-          <Typography className="mr-4 ml-2 cursor-pointer py-1.5 font-bold">
+          <Typography className="mr-4 ml-2 cursor-pointer py-1.5 font-bold text-2xl hover:text-blue-400 transition duration-300">
             {brandName}
           </Typography>
         </Link>
         {installable && (
           <InstallBtn
             id="install-btn"
-            className="install-btn"
+            className="install-btn bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded transition duration-200"
             onClick={handleInstallClick}
           />
         )}
