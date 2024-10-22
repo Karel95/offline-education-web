@@ -35,7 +35,15 @@ const Form = () => {
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: new URLSearchParams(data).toString(),
     })
-      .then(() => alert('Form submitted successfully.'))
+      .then(() => {
+        alert('Form submitted successfully.');
+        setFormData({
+          fullName: '',
+          email: '',
+          message: '',
+          agreed: false,
+        });
+      })
       .catch((error) => alert('Error submitting the form.', error));
   };
 
