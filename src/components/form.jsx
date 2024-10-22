@@ -130,7 +130,7 @@ const Form = () => {
           fullWidth
           type="submit"
         >
-          Send Message
+          Send
         </Button>
       </form>
     </>
