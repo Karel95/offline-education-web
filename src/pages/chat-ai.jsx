@@ -3,6 +3,93 @@ import * as qna from '@tensorflow-models/qna'; // Importa el modelo de QnA
 import '@tensorflow/tfjs-backend-cpu'; // Cargar backend CPU
 import '@tensorflow/tfjs-backend-webgl'; // Para aprovechar WebGL si está disponible
 import subjects from '../data/subjects'; // Importa el JSON
+import { driver } from 'driver.js';
+import 'driver.js/dist/driver.css';
+
+const driverObj = driver({
+  showProgress: true,
+  steps: [
+    {
+      element: '#chat-ai',
+      popover: {
+        title: 'Chat-AI',
+        description:
+          'Interact with the AI-powered chat to ask questions or get help with your content.',
+        side: 'right',
+        align: 'start',
+      },
+    },
+    {
+      element: '#show-passage',
+      popover: {
+        title: 'Show passage',
+        description:
+          'Click here to display the relevant passage or content for reference.',
+        side: 'bottom',
+        align: 'start',
+      },
+    },
+    {
+      element: '#question',
+      popover: {
+        title: 'Make a question',
+        description:
+          'Type your question here to interact with the AI and receive an answer.',
+        side: 'right',
+        align: 'start',
+      },
+    },
+    {
+      element: '#send',
+      popover: {
+        title: 'Send the question',
+        description: 'Submit your question to receive a response from the AI.',
+        side: 'left',
+        align: 'start',
+      },
+    },
+    {
+      element: '#ELA',
+      popover: {
+        title: 'English Language Arts (ELA)',
+        description:
+          'Explore resources and ask questions related to English Language Arts.',
+        side: 'left',
+        align: 'start',
+      },
+    },
+    {
+      element: '#maths',
+      popover: {
+        title: 'Mathematics',
+        description:
+          'Access and engage with educational materials for Mathematics.',
+        side: 'left',
+        align: 'start',
+      },
+    },
+    {
+      element: '#history',
+      popover: {
+        title: 'History',
+        description:
+          'Learn more about historical events and ask questions about history topics.',
+        side: 'left',
+        align: 'start',
+      },
+    },
+    {
+      element: '#help',
+      popover: {
+        title: 'Help',
+        description:
+          'Need assistance? Click here to access help or support resources.',
+        side: 'left',
+        align: 'start',
+      },
+    },
+  ],
+});
 
 export function ChatAI() {
   const [messages, setMessages] = useState([]); // Almacena los mensajes de usuario y IA
@@ -16,6 +103,7 @@ export function ChatAI() {
   const subject = subjects[subjID].name;
   const passage = subjects[subjID].content; // El 'passage' es el contexto del cual el modelo extraerá respuestas
   const [activeSubjId, setActiveSubjId] = useState(0);
+  const [snackbarVisible, setSnackbarVisible] = useState(false);
 
   useEffect(() => {
     let isComponentMounted = true;
@@ -37,6 +125,7 @@ export function ChatAI() {
       } finally {
         if (isComponentMounted) {
           setLoading(false); // End loading indicator
+          showSnackbar();
         }
       }
     };
@@ -109,6 +198,17 @@ export function ChatAI() {
     setSidebarVisible((prev) => !prev); // Alternar el estado de visibilidad del sidebar
   };
 
+  const showSnackbar = () => {
+    setSnackbarVisible(true);
+    setTimeout(() => {
+      setSnackbarVisible(false);
+    }, 5000); // Close the Snackbar after 5 seconds
+  };
+
+  const closeSnackbar = () => {
+    setSnackbarVisible(false);
+  };
+
   return (
     <div className="flex">
       {/* Sidebar con el 'passage' */}
@@ -132,9 +232,11 @@ export function ChatAI() {
       </div>
 
       <nav
+        id="sidebar"
         className={`z-20 flex shrink-0 grow-0 justify-around gap-4 border-t border-gray-200 bg-white/50 p-2.5 shadow-lg backdrop-blur-lg dark:border-slate-600/60 dark:bg-slate-800/50 fixed top-2/4 -translate-y-2/4 left-6 min-h-[auto] min-w-[64px] flex-col rounded-lg border ease-in-out transform transition-all duration-300 ${sidebarVisible ? 'ml-80' : 'ml-0'}`}
       >
         <a
+          id="ELA"
           onClick={() => {
             toggleSidebar();
             setSubjId(0);
@@ -165,6 +267,7 @@ export function ChatAI() {
         </a>
 
         <a
+          id="maths"
           onClick={() => {
             toggleSidebar();
             setSubjId(1);
@@ -195,6 +298,7 @@ export function ChatAI() {
         </a>
 
         <a
+          id="history"
           onClick={() => {
             toggleSidebar();
             setSubjId(2);
@@ -227,26 +331,27 @@ export function ChatAI() {
         <hr className="dark:border-gray-700/60" />
 
         <a
-          href=""
-          className="flex h-16 w-16 flex-col items-center justify-center gap-1 text-fuchsia-900 dark:text-gray-400"
+          id="help"
+          onClick={() => driverObj.drive()}
+          className="flex h-16 w-16 flex-col cursor-pointer items-center justify-center gap-1 text-fuchsia-900 dark:text-gray-400"
         >
           {/* <!-- HeroIcon - Home Modern --> */}
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
-            strokeWidth="1.5"
+            strokeWidth={1.5}
             stroke="currentColor"
-            className="w-6 h-6"
+            className="size-6"
           >
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
-              d="M8.25 21v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21m0 0h4.5V3.545M12.75 21h7.5V10.75M2.25 21h1.5m18 0h-18M2.25 9l4.5-1.636M18.75 3l-1.5.545m0 6.205l3 1m1.5.5l-1.5-.5M6.75 7.364V3h-3v18m3-13.636l10.5-3.819"
+              d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 5.25h.008v.008H12v-.008Z"
             />
           </svg>
 
-          <small className="text-xs font-medium">Home</small>
+          <small className="text-xs font-medium">Help</small>
         </a>
       </nav>
 
@@ -256,10 +361,14 @@ export function ChatAI() {
           sidebarVisible ? 'ml-80' : 'ml-0'
         }`}
       >
-        <div className="mt-10 w-[90%] md:w-[60%] bg-white bg-opacity-20 backdrop-blur-xs border border-gray-300 rounded-lg shadow-md">
+        <div
+          id="chat-ai"
+          className="mt-10 w-[90%] md:w-[60%] bg-white bg-opacity-20 backdrop-blur-xs border border-gray-300 rounded-lg shadow-md"
+        >
           <div className="bg-gray-800 text-white p-3 text-lg rounded-t-lg flex justify-between items-center">
             <span>Chat AI</span>
             <button
+              id="show-passage"
               onClick={toggleSidebar}
               className="ml-2 text-sm bg-blue-500 text-white rounded px-2 hover:bg-blue-600 transition"
             >
@@ -280,8 +389,11 @@ export function ChatAI() {
               </div>
             ))}
             {loading && (
-              <div className="p-3 rounded-lg bg-gray-300 text-black self-start">
-                Loading...
+              <div
+                id="loading"
+                className="p-3 rounded-lg bg-gray-300 text-black self-start"
+              >
+                Loading... Please wait...
               </div>
             )}
             <div ref={endOfMessagesRef} />{' '}
@@ -289,14 +401,16 @@ export function ChatAI() {
           </div>
           <div className="flex items-center p-3 border-t border-gray-300">
             <input
+              id="question"
               type="text"
               className="flex-1 border border-gray-300 rounded-lg p-2 text-sm outline-none focus:border-gray-500"
-              placeholder="Escribe tu mensaje aquí..."
+              placeholder="Type your message here..."
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={handleKeyDown}
             />
             <button
+              id="send"
               onClick={handleSendMessage}
               className="ml-2 bg-gray-800 text-white text-sm px-4 py-2 rounded-lg hover:bg-white hover:text-black hover:shadow-md transition"
             >
@@ -304,6 +418,29 @@ export function ChatAI() {
             </button>
           </div>
         </div>
+      </div>
+      <div
+        id="snackbar"
+        className="bg-green-500 text-white p-4 rounded-md fixed bottom-4 right-4 flex justify-between items-center"
+        style={{ display: snackbarVisible ? 'flex' : 'none' }}
+      >
+        Model loaded correctly, you can chat with the AI now. Thanks for waiting.
+        <button className="text-white" onClick={closeSnackbar}>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            className="w-4 h-4"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+        </button>
       </div>
     </div>
   );
