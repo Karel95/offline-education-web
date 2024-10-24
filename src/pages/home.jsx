@@ -2,7 +2,7 @@ import React from 'react';
 import { Typography } from '@material-tailwind/react';
 import { Footer } from '@/widgets/layout';
 import Form from '@/components/form';
-import { CardsBottom, CardsMiddle, CardsTop } from './home/cards';
+import { CardsBottom, CardsMiddle, CardsTop } from '../components/cards';
 
 export function Home() {
   return (
