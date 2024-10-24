@@ -7,6 +7,7 @@
 ## Features
 
 - **Offline Access**: Users can view educational content without an internet connection.
+- **AI-Powered Question and Answering**: Users can interact with an offline AI model to ask questions and receive answers.
 - **Search Functionality**: Quickly find information within the app.
 - **User-Friendly Interface**: Designed with a focus on ease of use for students and educators.
 - **Responsive Design**: Works seamlessly on various devices, including desktops, tablets, and smartphones.
@@ -16,6 +17,7 @@
 - **Frontend**: React, Vite, Material Tailwind
 - **Backend**: Node.js, ExpressJS, PostgreSQL
 - **AI Features**: TensorFlow.js for offline Question and Answering model
+- **Interactive Tours**: Driver.js for creating guided user tours to explain key features
 - **Hosting**: Netlify, Railway
 - **PWA Technologies**: Service Workers, Cache API, VitePWA Plugin
 
@@ -30,7 +32,7 @@
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/suriname-offline-education-web.git
+   git clone https://github.com/Karel95/offline-education-web
    cd suriname-offline-education-web
 2. Install the dependencies:
   ```bash
@@ -44,7 +46,7 @@
 
 ### Usage
 
-Once the application is running, you can access it at http://localhost:3000. The app will automatically cache the necessary resources for offline access.
+Once the application is running, you can access it at http://localhost:5173. The app will automatically cache the necessary resources for offline access.
 
 ### Contributing
 
