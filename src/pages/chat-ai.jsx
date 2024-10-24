@@ -233,8 +233,10 @@ export function ChatAI() {
 
       <nav
         id="sidebar"
-        className={`z-20 flex shrink-0 grow-0 justify-around gap-4 border-t border-gray-200 bg-white/50 p-2.5 shadow-lg backdrop-blur-lg dark:border-slate-600/60 dark:bg-slate-800/50 fixed top-2/4 -translate-y-2/4 left-6 min-h-[auto] min-w-[64px] flex-col rounded-lg border ease-in-out transform transition-all duration-300 ${sidebarVisible ? 'ml-80' : 'ml-0'}`}
+        className={`md:z-20 md:w-auto flex md:shrink-0 md:grow-0 md:top-2/4 md:-translate-y-2/4 md:left-6 md:min-h-[auto] md:flex-col md:gap-4 border-t border-gray-200 bg-white/50 md:p-2.5 shadow-lg dark:border-slate-600/60 dark:bg-slate-800/50 fixed md:rounded-lg border ease-in-out transform transition-all duration-300 ${sidebarVisible ? 'ml-80' : 'ml-0'} 
+          mx-auto top-auto p-1 justify-around w-[100%] rounded-lg fixed bottom-0 flex-row translate-y-0`}
       >
+        {' '}
         <a
           id="ELA"
           onClick={() => {
@@ -265,7 +267,6 @@ export function ChatAI() {
           </svg>
           <small className="text-center text-xs font-medium">ELA</small>
         </a>
-
         <a
           id="maths"
           onClick={() => {
@@ -296,7 +297,6 @@ export function ChatAI() {
           </svg>
           <small className="text-center text-xs font-medium">Maths</small>
         </a>
-
         <a
           id="history"
           onClick={() => {
@@ -327,9 +327,7 @@ export function ChatAI() {
           </svg>
           <small className="text-center text-xs font-medium">History</small>
         </a>
-
         <hr className="dark:border-gray-700/60" />
-
         <a
           id="help"
           onClick={() => driverObj.drive()}
@@ -363,7 +361,7 @@ export function ChatAI() {
       >
         <div
           id="chat-ai"
-          className="mt-10 w-[90%] md:w-[60%] bg-white bg-opacity-20 backdrop-blur-xs border border-gray-300 rounded-lg shadow-md"
+          className="mt-10 mb-1 w-[90%] md:w-[60%] bg-white bg-opacity-20 backdrop-blur-xs border border-gray-300 rounded-lg shadow-md"
         >
           <div className="bg-gray-800 text-white p-3 text-lg rounded-t-lg flex justify-between items-center">
             <span>Chat AI</span>
@@ -424,7 +422,8 @@ export function ChatAI() {
         className="bg-green-500 text-white p-4 rounded-md fixed bottom-4 right-4 flex justify-between items-center"
         style={{ display: snackbarVisible ? 'flex' : 'none' }}
       >
-        Model loaded correctly, you can chat with the AI now. Thanks for waiting.
+        Model loaded correctly, you can chat with the AI now. Thanks for
+        waiting.
         <button className="text-white" onClick={closeSnackbar}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
