@@ -370,7 +370,7 @@ export function ChatAI() {
               onClick={toggleSidebar}
               className="ml-2 text-sm bg-blue-500 text-white rounded px-2 hover:bg-blue-600 transition"
             >
-              {sidebarVisible ? 'Hide' : 'Show'} Passage
+              {sidebarVisible ? 'Hide' : 'Show'} Content
             </button>
           </div>
           <div className="h-80 overflow-y-scroll p-4 space-y-4">
