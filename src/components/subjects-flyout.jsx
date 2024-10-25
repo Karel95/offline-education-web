@@ -39,11 +39,24 @@ const SubjectsFlyout = ({ maxHeight }) => {
   const handleSearch = (event) => {
     event.preventDefault();
 
-    // Filtrar los elementos basados en el término de búsqueda
-    const filteredSubjects = subjects.filter(subject =>
-      subject.name.toLowerCase().includes(searchTerm.toLowerCase())
+    // Filtrar los temas basados en el término de búsqueda
+    const results = subjects.filter((subject) =>
+      subject.name.toLowerCase().includes(searchTerm.toLowerCase()),
     );
-    setFilteredSubjects(filteredSubjects); // Guardar los resultados filtrados
+
+    setFilteredSubjects(results); // Guardar los resultados filtrados
+  };
+
+  const handleChange = (e) => {
+    const value = e.target.value;
+    setSearchTerm(value);
+
+    // Si el input está vacío, restablecer los resultados
+    if (value === '') {
+      setFilteredSubjects([]); // Limpiar los resultados
+    } else {
+      handleSearch(e); // Filtrar los resultados si hay texto
+    }
   };
 
   return (
@@ -77,23 +90,17 @@ const SubjectsFlyout = ({ maxHeight }) => {
         <div className="absolute md:w-screen right-1 z-10 mt-5 flex max-w-lg px-4">
           <div className="max-w-lg md:max-w-lg flex overflow-hidden rounded-3xl bg-white text-sm shadow-lg ring-1 ring-gray-900/5">
             <div className="p-4" style={{ maxHeight, overflowY: 'auto' }}>
-              <form
-                onSubmit={handleSearch}
-                className="flex items-center"
-              >
+              <form onSubmit={handleSearch} className="flex items-center">
                 <input
-                  onChange={(e) => setSearchTerm(e.target.value)}
+                  onChange={handleChange}
                   value={searchTerm}
                   id="search-input"
                   className="block w-full px-4 py-2 text-gray-900 border rounded-md border-gray-300 focus:outline-none"
                   type="text"
-                  placeholder="Search subjects"
+                  placeholder="Search subject"
                   autoComplete="off"
                 />
-                <button
-                  type="submit"
-                  className="px-4 py-2 text-gray-900"
-                >
+                <button type="submit" className="px-4 py-2 text-gray-900">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -114,11 +121,13 @@ const SubjectsFlyout = ({ maxHeight }) => {
               <div className="mt-4 text-gray-800">
                 {filteredSubjects.length > 0 ? (
                   <ul>
-                    {filteredSubjects.map(subject => (
-                      <li key={subject.id}>
-                      <h3>{subject.name}</h3>
-                      <p>{subject.description}</p>
-                    </li>
+                    {filteredSubjects.map((subject) => (
+                      <li key={subject.id} className="mb-4">
+                        <h3 className="text-lg font-semibold">
+                          {subject.name}
+                        </h3>
+                        <p>{subject.description}</p>
+                      </li>
                     ))}
                   </ul>
                 ) : (
