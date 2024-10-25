@@ -1,11 +1,14 @@
 import { Button } from '@material-tailwind/react';
 import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom'; // Importa Link
+import subjects from '../data/subjects';
 
 const SubjectsFlyout = ({ maxHeight }) => {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
   const flyoutRef = useRef(null); // Create a ref for the flyout
+  const [searchTerm, setSearchTerm] = useState('');
+  const [filteredSubjects, setFilteredSubjects] = useState([]);
 
   const toggleFlyout = () => {
     setIsOpen((prev) => !prev);
@@ -31,6 +34,17 @@ const SubjectsFlyout = ({ maxHeight }) => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
+
+  //Search Bar
+  const handleSearch = (event) => {
+    event.preventDefault();
+
+    // Filtrar los elementos basados en el término de búsqueda
+    const filteredSubjects = subjects.filter(subject =>
+      subject.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setFilteredSubjects(filteredSubjects); // Guardar los resultados filtrados
+  };
 
   return (
     <div className="relative" ref={flyoutRef}>
@@ -60,9 +74,57 @@ const SubjectsFlyout = ({ maxHeight }) => {
       </Button>
 
       {isOpen && (
-        <div className="absolute left-1/2 z-10 mt-5 flex w-screen max-w-max -translate-x-1/2 px-4">
-          <div className="w-screen max-w-md flex-auto overflow-hidden rounded-3xl bg-white text-sm leading-6 shadow-lg ring-1 ring-gray-900/5">
+        <div className="absolute md:w-screen right-1 z-10 mt-5 flex max-w-lg px-4">
+          <div className="max-w-lg md:max-w-lg flex overflow-hidden rounded-3xl bg-white text-sm shadow-lg ring-1 ring-gray-900/5">
             <div className="p-4" style={{ maxHeight, overflowY: 'auto' }}>
+              <form
+                onSubmit={handleSearch}
+                className="flex items-center"
+              >
+                <input
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  value={searchTerm}
+                  id="search-input"
+                  className="block w-full px-4 py-2 text-gray-900 border rounded-md border-gray-300 focus:outline-none"
+                  type="text"
+                  placeholder="Search subjects"
+                  autoComplete="off"
+                />
+                <button
+                  type="submit"
+                  className="px-4 py-2 text-gray-900"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="size-6"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
+                    />
+                  </svg>
+                </button>
+              </form>
+              {/* Mostrar resultados filtrados */}
+              <div className="mt-4 text-gray-800">
+                {filteredSubjects.length > 0 ? (
+                  <ul>
+                    {filteredSubjects.map(subject => (
+                      <li key={subject.id}>
+                      <h3>{subject.name}</h3>
+                      <p>{subject.description}</p>
+                    </li>
+                    ))}
+                  </ul>
+                ) : (
+                  searchTerm && <p>No results found.</p>
+                )}
+              </div>
               {/* Estructura de ejemplo */}
               <div className="group relative flex gap-x-6 rounded-lg p-4 hover:bg-gray-50">
                 <div className="mt-1 flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">

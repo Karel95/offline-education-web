@@ -173,7 +173,7 @@ export function Navbar({ brandName, routes }) {
 
         <div className="hidden lg:block">{navList}</div>
         <div className="hidden gap-2 lg:flex">
-          <SubjectsFlyout maxHeight={'400px'} />
+          <SubjectsFlyout maxHeight={'500px'} />
         </div>
         <IconButton
           variant="text"
