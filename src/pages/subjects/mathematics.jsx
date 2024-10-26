@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { Footer } from '@/widgets/layout';
+import AiOnline from '@/components/ai-online';
 
 const MathematicsPage = () => {
   return (
@@ -110,6 +111,8 @@ const MathematicsPage = () => {
           </li>
         </ul>
       </div>
+
+      <AiOnline />
 
       <div className="bg-white">
         <Footer />
