@@ -91,7 +91,7 @@ const driverObj = driver({
   ],
 });
 
-export function ChatAI() {
+export function AiOffline() {
   const [messages, setMessages] = useState([]); // Almacena los mensajes de usuario y IA
   const [input, setInput] = useState(''); // Almacena el valor del input
   const [loading, setLoading] = useState(false); // Indicador de carga mientras busca respuestas
@@ -364,7 +364,7 @@ export function ChatAI() {
           className="mt-10 mb-1 w-[90%] md:w-[60%] bg-white bg-opacity-20 backdrop-blur-xs border border-gray-300 rounded-lg shadow-md"
         >
           <div className="bg-gray-800 text-white p-3 text-lg rounded-t-lg flex justify-between items-center">
-            <span>Chat AI</span>
+            <span>AI Offline</span>
             <button
               id="show-passage"
               onClick={toggleSidebar}
@@ -445,4 +445,4 @@ export function ChatAI() {
   );
 }
 
-export default ChatAI;
+export default AiOffline;

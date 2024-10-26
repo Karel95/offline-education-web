@@ -3,6 +3,7 @@ import { Typography } from '@material-tailwind/react';
 import { Footer } from '@/widgets/layout';
 import Form from '@/components/form';
 import { CardsBottom, CardsMiddle, CardsTop } from '../components/cards';
+import AiOnline from '@/components/ai-online';
 
 export function Home() {
   return (
@@ -30,6 +31,8 @@ export function Home() {
           </div>
         </div>
       </div>
+
+      <AiOnline />
 
       <CardsTop />
 

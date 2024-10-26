@@ -1,16 +1,16 @@
 //src/routes/routes.jsx
-import { Home, ChatAI, SignIn, SignUp, Profile } from "@/pages";
+import { Home, AiOffline, SignIn, SignUp, Profile } from "@/pages";
 
 export const routes = [
   {
-    name: "home",
+    name: "Home",
     path: "/home",
     element: <Home />,
   },
   {
-    name: "chat-ai",
-    path: "/chat-ai",
-    element: <ChatAI />,
+    name: "Ai-Offline",
+    path: "/ai-offline",
+    element: <AiOffline />,
   },
   {
     name: "Sign In",
