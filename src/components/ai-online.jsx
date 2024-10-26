@@ -31,22 +31,17 @@ const AiOnline = () => {
     setInput('');
 
     try {
-      // Llamada a la API de Hugging Face para la generación de texto
-      const response = await hf.textGeneration({
-        model: 'microsoft/DialoGPT-medium', // Modelo
-        inputs: input,
-        options: {
-          max_length: 15, // Respuesta más corta
-          temperature: 0.5, // Menos aleatorio, más coherente
-          num_return_sequences: 1, // Solo queremos una respuesta
-          top_k: 50, // Control de la diversidad
-          top_p: 0.95, // Control de la diversidad
-        },
+      // Llamada a la API de Hugging Face para el chat completion usando Mistral
+      const response = await hf.chatCompletion({
+        model: 'mistralai/Mistral-7B-Instruct-v0.2', // Puedes probar otros modelos aquí
+        messages: [{ role: 'user', content: input }],
+        max_tokens: 100, // Ajusta según tus necesidades
+        temperature: 0.5,
       });
 
       // Comprobamos la respuesta generada
       const modelResponse =
-        response?.generated_text ||
+        response.choices?.[0]?.message?.content ||
         "I'm sorry, I can't answer that right now.";
 
       setMessages([...newMessages, { sender: 'AI', text: modelResponse }]);
