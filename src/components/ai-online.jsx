@@ -1,5 +1,6 @@
-// ChatComponent.jsx
 import React, { useState, useEffect, useRef } from 'react';
+import { HfInference } from '@huggingface/inference';
+//`Bearer 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`
 
 const AiOnline = () => {
   const [isOnline, setIsOnline] = useState(navigator.onLine);
@@ -8,6 +9,7 @@ const AiOnline = () => {
   const [input, setInput] = useState('');
   const chatRef = useRef(null);
   const messagesEndRef = useRef(null);
+  const hf = new HfInference('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');
 
   // Detectar cambios en el estado de conectividad
   useEffect(() => {
@@ -24,33 +26,32 @@ const AiOnline = () => {
   const handleSendMessage = async () => {
     if (input.trim() === '') return;
 
-    // Añadir el mensaje del usuario al chat
     const newMessages = [...messages, { sender: 'User', text: input }];
     setMessages(newMessages);
     setInput('');
 
-    // Solicitar una respuesta del modelo Hugging Face
     try {
-      const response = await fetch(
-        'https://api-inference.huggingface.co/models/deepset/roberta-base-squad2',
-        {
-          method: 'POST',
-          headers: { Authorization: `Bearer tu_token_de_huggingface` },
-          body: JSON.stringify({
-            inputs: {
-              question: input,
-              context: 'contexto de tu proyecto aquí',
-            },
-          }),
+      // Llamada a la API de Hugging Face para la generación de texto
+      const response = await hf.textGeneration({
+        model: 'openai-community/gpt2', // Modelo
+        inputs: input,
+        options: {
+          max_length: 15, // Respuesta más corta
+          temperature: 0.5, // Menos aleatorio, más coherente
+          num_return_sequences: 1, // Solo queremos una respuesta
+          top_k: 50, // Control de la diversidad
+          top_p: 0.95, // Control de la diversidad
         },
-      );
-      const data = await response.json();
-      const modelResponse =
-        data.answer || `I'm sorry, I can't answer that right now.`;
+      });
 
-      // Añadir la respuesta al chat
+      // Comprobamos la respuesta generada
+      const modelResponse =
+        response?.generated_text ||
+        "I'm sorry, I can't answer that right now.";
+
       setMessages([...newMessages, { sender: 'AI', text: modelResponse }]);
     } catch (error) {
+      console.error('Error al llamar a la API:', error);
       setMessages([
         ...newMessages,
         { sender: 'AI', text: 'Failed to connect to the AI model.' },
@@ -90,7 +91,9 @@ const AiOnline = () => {
           ref={chatRef}
           className="fixed bottom-4 right-4 w-80 bg-white border border-gray-300 rounded-lg shadow-lg p-4"
         >
-          <h3 className="text-lg font-semibold text-gray-700 mb-3">Chat AI Online</h3>
+          <h3 className="text-lg font-semibold text-gray-700 mb-3">
+            Chat AI Online
+          </h3>
 
           <div className="h-48 overflow-y-auto bg-gray-100 rounded-lg p-2 mb-3">
             {messages.map((msg, index) => (

@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@heroicons/react": "2.0.18",
+    "@huggingface/inference": "^2.8.1",
     "@material-tailwind/react": "^2.1.10",
     "@tensorflow-models/qna": "^1.0.2",
     "@tensorflow/tfjs": "^4.21.0",
