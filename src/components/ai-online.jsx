@@ -33,7 +33,7 @@ const AiOnline = () => {
     try {
       // Llamada a la API de Hugging Face para la generación de texto
       const response = await hf.textGeneration({
-        model: 'openai-community/gpt2', // Modelo
+        model: 'microsoft/DialoGPT-medium', // Modelo
         inputs: input,
         options: {
           max_length: 15, // Respuesta más corta
