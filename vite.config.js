@@ -10,26 +10,37 @@ export default defineConfig({
         maximumFileSizeToCacheInBytes: 50000000, // 50 MB
         runtimeCaching: [
           {
+            // Coincide con cualquier archivo dentro de la carpeta `public`
+            urlPattern: /^\/.*\.(?:png|jpg|jpeg|svg|gif|js|json|css)$/,
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'assets-cache',
+              expiration: {
+                maxEntries: 100, // Puede ajustarse según el tamaño de tu proyecto
+                maxAgeSeconds: 60 * 60 * 24 * 30, // 30 días
+              },
+            },
+          },
+          {
             urlPattern: ({ request }) => request.mode === 'navigate',
             handler: 'NetworkFirst',
             options: {
               cacheName: 'pages-cache',
               expiration: {
                 maxEntries: 10,
-                maxAgeSeconds: 60 * 60 * 24 * 7, // 1 week
+                maxAgeSeconds: 60 * 60 * 24 * 7, // 1 semana
               },
             },
           },
         ],
       },
-      registerType: 'autoUpdate', // Asegura que las actualizaciones se manejen automáticamente
+      registerType: 'autoUpdate',
       manifest: {
         display: 'standalone',
-        display_override: ['window-controls-overlay'],
-        lang: 'en',
         name: 'Suriname Offline Education Web | by TechMentors',
         short_name: 'EduWeb',
-        description: 'PWA for offline access to educational content in regions with limited internet.',
+        description:
+          'PWA for offline access to educational content in regions with limited internet.',
         theme_color: '#ffffff',
         background_color: '#000000',
         icons: [
@@ -43,11 +54,6 @@ export default defineConfig({
       },
     }),
   ],
-  server: {
-    hmr: {
-      overlay: false, // Desactiva la superposición del Hot Module Replacement
-    },
-  },
   resolve: {
     alias: [{ find: '@', replacement: '/src' }],
   },
