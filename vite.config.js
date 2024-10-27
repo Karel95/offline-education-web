@@ -21,12 +21,12 @@ export default defineConfig({
             },
           },
           {
-            urlPattern: /\/models\/.*\.json$/, // Ajusta la ruta según la ubicación de tu modelo
+            urlPattern: /\/models\/mobilebert\/.*\.(json|bin)$/, // Coincide con archivos .json y .bin en /models/mobilebert/
             handler: 'CacheFirst',
             options: {
               cacheName: 'models-cache',
               expiration: {
-                maxEntries: 5,
+                maxEntries: 50,
                 maxAgeSeconds: 60 * 60 * 24 * 30, // 30 días
               },
             },
