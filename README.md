@@ -16,10 +16,13 @@
 
 - **Frontend**: React, Vite, Material Tailwind
 - **Backend**: Node.js, ExpressJS, PostgreSQL
-- **AI Features**: TensorFlow.js for offline Question and Answering model
+- **AI Features**: 
+  - **Offline**: TensorFlow.js for Question and Answering model
+  - **Online**: Hugging Face API with Mistral AI for real-time question answering and conversational capabilities
 - **Interactive Tours**: Driver.js for creating guided user tours to explain key features
 - **Hosting**: Netlify, Railway
 - **PWA Technologies**: Service Workers, Cache API, VitePWA Plugin
+
 
 ## Getting Started
 
@@ -30,19 +33,15 @@
 
 ### Installation
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/Karel95/offline-education-web
-   cd suriname-offline-education-web
-2. Install the dependencies:
+1. Install the dependencies:
   ```bash
   npm install
-3. Set up your environment variables (create a .env file based on the .env.example):
-  ```bash
-  DATABASE_URL=your_database_url
-4. Start the development server:
+2. Start the development server:
   ```bash
   npm run dev
+3. Build the project for production:
+  ```bash
+  npm run build
 
 ### Usage
 
