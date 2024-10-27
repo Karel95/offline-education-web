@@ -113,8 +113,8 @@ export function AiOffline() {
       setLoading(true); // Start loading indicator
       try {
         const loadedModel = await qna.load({
-          modelUrl: '/models/mobilebert/model.json', // Load the local model
-          vocabUrl: '/models/mobilebert/processed_vocab.json', // Ruta local del vocabulario
+          modelUrl: '/models/mobilebert/model.json',
+          vocabUrl: '/models/mobilebert/processed_vocab.json',
         });
 
         if (isComponentMounted) {
