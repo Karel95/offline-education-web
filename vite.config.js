@@ -16,18 +16,18 @@ export default defineConfig({
               cacheName: 'images-cache',
               expiration: {
                 maxEntries: 50,
-                maxAgeSeconds: 60 * 60 * 24 * 30, // 30 días
+                maxAgeSeconds: 60 * 60 * 24 * 30,
               },
             },
           },
           {
-            urlPattern: /\/models\/mobilebert\/.*\.(json|bin)$/, // Coincide con archivos .json y .bin en /models/mobilebert/
+            urlPattern: /\/models\/mobilebert\/.*\.(json|bin)$/,
             handler: 'CacheFirst',
             options: {
               cacheName: 'models-cache',
               expiration: {
                 maxEntries: 50,
-                maxAgeSeconds: 60 * 60 * 24 * 30, // 30 días
+                maxAgeSeconds: 60 * 60 * 24 * 30,
               },
             },
           },
