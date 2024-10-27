@@ -71,7 +71,7 @@ const AiOnline = () => {
   }, [messages]);
 
   return (
-    <div className="fixed bottom-8 right-4 z-10">
+    <div className="fixed bottom-20 right-10 z-10">
       {isOnline && (
         <button
           onClick={() => setShowChat(!showChat)}
@@ -84,7 +84,7 @@ const AiOnline = () => {
       {showChat && (
         <div
           ref={chatRef}
-          className="fixed bottom-4 right-4 w-80 bg-white border border-gray-300 rounded-lg shadow-lg p-4"
+          className="fixed bottom-8 right-8 w-80 bg-white border border-gray-300 rounded-lg shadow-lg p-4"
         >
           <h3 className="text-lg font-semibold text-gray-700 mb-3">
             Chat AI Online
