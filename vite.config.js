@@ -7,7 +7,7 @@ export default defineConfig({
     react(),
     VitePWA({
       workbox: {
-        maximumFileSizeToCacheInBytes: 50000000, // 50 MB
+        maximumFileSizeToCacheInBytes: 500000000, // 500 MB
         runtimeCaching: [
           {
             urlPattern: ({ request }) => request.destination === 'image',
@@ -60,6 +60,12 @@ export default defineConfig({
             type: 'image/png',
             purpose: 'any maskable',
           },
+        ],
+        start_url: '/',
+        precache: [
+          '/models/mobilebert/model.json',
+          '/models/mobilebert/processed_vocab.json',
+          // Agrega aquí otros archivos si es necesario
         ],
       },
     }),
