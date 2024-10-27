@@ -10,13 +10,23 @@ export default defineConfig({
         maximumFileSizeToCacheInBytes: 50000000, // 50 MB
         runtimeCaching: [
           {
-            // Coincide con cualquier archivo dentro de la carpeta `public`
-            urlPattern: /^\/.*\.(?:png|jpg|jpeg|svg|gif|js|json|css)$/,
+            urlPattern: ({ request }) => request.destination === 'image',
             handler: 'CacheFirst',
             options: {
-              cacheName: 'assets-cache',
+              cacheName: 'images-cache',
               expiration: {
-                maxEntries: 100, // Puede ajustarse según el tamaño de tu proyecto
+                maxEntries: 50,
+                maxAgeSeconds: 60 * 60 * 24 * 30, // 30 días
+              },
+            },
+          },
+          {
+            urlPattern: /\/models\/.*\.json$/, // Ajusta la ruta según la ubicación de tu modelo
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'models-cache',
+              expiration: {
+                maxEntries: 5,
                 maxAgeSeconds: 60 * 60 * 24 * 30, // 30 días
               },
             },
