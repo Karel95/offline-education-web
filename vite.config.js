@@ -7,7 +7,7 @@ export default defineConfig({
     react(),
     VitePWA({
       workbox: {
-        maximumFileSizeToCacheInBytes: 500000000, // 500 MB
+        maximumFileSizeToCacheInBytes: 500000000, // 500 MB - review as needed
         runtimeCaching: [
           {
             urlPattern: ({ request }) => request.destination === 'image',
@@ -16,7 +16,7 @@ export default defineConfig({
               cacheName: 'images-cache',
               expiration: {
                 maxEntries: 50,
-                maxAgeSeconds: 60 * 60 * 24 * 30,
+                maxAgeSeconds: 60 * 60 * 24 * 30, // 30 days
               },
             },
           },
@@ -27,7 +27,7 @@ export default defineConfig({
               cacheName: 'models-cache',
               expiration: {
                 maxEntries: 50,
-                maxAgeSeconds: 60 * 60 * 24 * 30,
+                maxAgeSeconds: 60 * 60 * 24 * 30, // 30 days
               },
             },
           },
@@ -38,7 +38,7 @@ export default defineConfig({
               cacheName: 'pages-cache',
               expiration: {
                 maxEntries: 10,
-                maxAgeSeconds: 60 * 60 * 24 * 7, // 1 semana
+                maxAgeSeconds: 60 * 60 * 24 * 7, // 1 week
               },
             },
           },
@@ -56,7 +56,13 @@ export default defineConfig({
         icons: [
           {
             src: '/img/suriname-logo.png',
-            sizes: 'any',
+            sizes: '192x192',
+            type: 'image/png',
+            purpose: 'any maskable',
+          },
+          {
+            src: '/img/suriname-logo.png',
+            sizes: '512x512',
             type: 'image/png',
             purpose: 'any maskable',
           },
@@ -65,7 +71,7 @@ export default defineConfig({
         precache: [
           '/models/mobilebert/model.json',
           '/models/mobilebert/processed_vocab.json',
-          // Agrega aquí otros archivos si es necesario
+          // Add more essential files here
         ],
       },
     }),
